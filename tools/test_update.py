@@ -1,4 +1,4 @@
-import importlib.util, tempfile, unittest, urllib.error
+import importlib.util, tempfile, unittest, urllib.error, re
 from pathlib import Path
 from unittest.mock import patch
 spec=importlib.util.spec_from_file_location('update',Path(__file__).with_name('update.py'))
@@ -116,4 +116,43 @@ class UpdateTests(unittest.TestCase):
         for name in ['🏦 汇丰香港','🏦 香港银行']:
             row=next(l for l in full.splitlines() if l.startswith(name+' ='))
             self.assertEqual(row.split('=',1)[1].strip().split(',')[1],'DIRECT')
+class SplashRegressionTests(unittest.TestCase):
+    def test_splash_routes_and_conflicting_rejects(self):
+        urls = [
+            'https://g-acs.m.goofish.com/gw/mtop.taobao.idlecommerce.splash.ads/1.0/?data=x',
+            'https://acs.m.goofish.com/gw/mtop.idle.ad.expose/1.0/',
+            'https://acs.m.taobao.com/gw/mtop.fliggy.crm.screen.availablesplashstrategies/1.0/',
+            'https://mapi.dianping.com/mapi/operating/loadsplashconfig?cityId=2',
+            'https://m.ctrip.com/restapi/soa2/13916/scjson/tripAds?os=ios',
+        ]
+        for name in ('full.conf', 'adblock.sgmodule'):
+            sections=u.read_sections((u.ROOT/'profiles'/name).read_text())
+            # These endpoints have exactly one replacement, no stale blank response.
+            maps=u.active(sections['[Map Local]'])
+            rewrites=u.active(sections['[URL Rewrite]'])
+            for url in urls:
+                matches=[r for r in maps if re.search(r.split()[0],url)]
+                self.assertEqual(len(matches),1,(name,url,matches))
+                self.assertIn('data="{}"',matches[0])
+                for row in rewrites:
+                    if any(host in row for host in ('goofish','dianping','ctrip','fliggy')):
+                        self.assertIsNone(re.search(row.split()[0],url),(name,row,url))
+    def test_patch_preserves_business_endpoints_and_qixin_mitm(self):
+        business=[
+            'https://m.ctrip.com/restapi/soa2/13916/json/getAppConfig',
+            'https://m.ctrip.com/restapi/soa2/13916/json/createOrder',
+            'https://acs.m.taobao.com/gw/mtop.fliggy.trade.order.create/1.0/',
+            'https://acs.m.goofish.com/gw/mtop.taobao.idle.item.detail/1.0/',
+            'https://appc-v6.qixin.com/v4/enterprise/getBasicInfo',
+        ]
+        for name in ('full.conf','adblock.sgmodule'):
+            sections=u.read_sections((u.ROOT/'profiles'/name).read_text())
+            patches=u.active(sections['[Map Local]'])[:4]
+            for url in business:
+                self.assertFalse(any(re.search(r.split()[0],url) for r in patches),(name,url))
+            material='https://qxb-minicode-pic-osscache.qixin.com/web/test.jpg'
+            rewrite=u.active(sections['[URL Rewrite]'])[0]
+            self.assertIsNotNone(re.search(rewrite.split()[0],material))
+            self.assertIn('qxb-minicode-pic-osscache.qixin.com', ''.join(sections['[MITM]']))
+
 if __name__=='__main__':unittest.main()
