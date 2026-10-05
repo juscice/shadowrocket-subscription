@@ -43,7 +43,11 @@ def attr(line, key):
     return m[1].strip() if m else None
 
 def validate_remote_content(text, kind):
-    if kind == 'json':
+    if kind == 'routing':
+        rows = active(text.splitlines())
+        if not rows or len(rows) > 50000: raise ValueError('invalid routing source size')
+        for row in rows: canonical_routing_rule(row)
+    elif kind == 'json':
         json.loads(text)
     elif kind in {'rules', 'domains'}:
         lines = active(text.splitlines())
@@ -61,6 +65,74 @@ def validate_remote_content(text, kind):
                 raise ValueError('invalid rule set entry')
             elif fields[0] in {'IP-CIDR', 'IP-CIDR6'}:
                 ipaddress.ip_network(fields[1], strict=False)
+
+
+def canonical_routing_rule(line):
+    """Normalize policy-free source entries without accidentally turning routes into ads."""
+    fields = [x.strip() for x in line.split(',')]
+    allowed = {'DOMAIN', 'DOMAIN-SUFFIX', 'DOMAIN-KEYWORD', 'IP-CIDR', 'IP-CIDR6',
+               'IP-ASN', 'USER-AGENT', 'URL-REGEX', 'GEOIP'}
+    if len(fields) < 2 or fields[0] not in allowed or not fields[1]:
+        raise ValueError('unsupported routing source entry: ' + line)
+    kind, target = fields[:2]
+    if kind.startswith('DOMAIN'):
+        target = target.lower().rstrip('.')
+        if not re.fullmatch(r'[a-z0-9_.-]+', target): raise ValueError('invalid routing domain')
+    if kind in {'IP-CIDR', 'IP-CIDR6'}:
+        network = ipaddress.ip_network(target, strict=False)
+        kind = 'IP-CIDR' if network.version == 4 else 'IP-CIDR6'
+        return ','.join([kind, str(network), 'no-resolve'])
+    return ','.join([kind, target])
+
+
+def deduplicate_routing(rows):
+    # Only fold suffix/network coverage inside the same policy. A precise exception
+    # under a DIFFERENT policy must remain and must keep its original precedence.
+    rows = list(dict.fromkeys(rows))
+    suffixes = {r.split(',')[1] for r in rows if r.startswith('DOMAIN-SUFFIX,')}
+    networks = [(r, ipaddress.ip_network(r.split(',')[1])) for r in rows
+                if r.startswith(('IP-CIDR,', 'IP-CIDR6,'))]
+    result = []
+    for row in rows:
+        kind, target = row.split(',')[:2]
+        if kind in {'DOMAIN', 'DOMAIN-SUFFIX'}:
+            parts = target.split('.')
+            parents = ['.'.join(parts[i:]) for i in range(1, len(parts))]
+            if any(p in suffixes for p in parents + ([target] if kind == 'DOMAIN' else [])):
+                continue
+        if kind in {'IP-CIDR', 'IP-CIDR6'}:
+            net = ipaddress.ip_network(target)
+            if any(net != other and net.version == other.version and net.subnet_of(other)
+                   for _, other in networks): continue
+        result.append(row)
+    return result
+
+
+def build_routing(offline):
+    results, lines, counts, seen = [], list(CONF.get('routing_prefix', [])), {}, set()
+    for row in lines:
+        if row.startswith(('DOMAIN,', 'DOMAIN-SUFFIX,', 'DOMAIN-KEYWORD,', 'IP-CIDR,', 'IP-CIDR6,')):
+            seen.add(canonical_routing_rule(row))
+    for source in CONF.get('routing_sources', []):
+        rows = []
+        for url in source['urls']:
+            target = CACHE/'routing'/(hashlib.sha256(url.encode()).hexdigest()[:20]+'.list')
+            result = fetch(url, target, offline, content_kind='routing')
+            result['path'] = str(target.relative_to(ROOT)); results.append(result)
+            if result['status'] == 'unavailable': raise ValueError('routing source unavailable: ' + url)
+            rows += [canonical_routing_rule(r) for r in active(target.read_text().splitlines())]
+        if not rows or len(rows) > 50000: raise ValueError('routing source size guard')
+        kept = deduplicate_routing(rows)
+        # Earlier groups own exact matcher conflicts. Broader routes under another
+        # policy remain intentional fallbacks (e.g. push.apple.com before apple.com).
+        kept = [r for r in kept if r not in seen]
+        seen.update(kept)
+        counts[source['name']] = {'input': len(rows), 'kept': len(kept), 'removed': len(rows)-len(kept)}
+        lines.append('# '+source['name']+' -> '+source['policy'])
+        for row in kept:
+            f = row.split(',')
+            lines.append(','.join(f[:2]+[source['policy']]+f[2:]))
+    return '\n'.join(lines), results, counts
 
 
 def remote_references(text):
@@ -251,6 +323,12 @@ def main():
     lo,hi=min(idx),max(idx)
     if any(l.strip() and not l.startswith('#') and l.strip() not in oldset for l in lines[lo:hi+1]):raise ValueError('non-ad routing inside ad block')
     full=replace_section(full,'[Rule]','\n'.join(lines[:lo])+'\n'+block+'\n'+'\n'.join(lines[hi+1:]))
+    routing, routing_results, routing_counts = build_routing(args.offline)
+    results += routing_results
+    if CONF.get('routing_sources'):
+        pattern = r'# BEGIN GENERATED ROUTING\n.*?# END GENERATED ROUTING'
+        full, changed = re.subn(pattern, lambda _: '# BEGIN GENERATED ROUTING\n'+routing+'\n# END GENERATED ROUTING', full, flags=re.S)
+        if changed != 1: raise ValueError('missing or repeated generated routing marker')
     repository=os.environ.get('GITHUB_REPOSITORY',CONF['owner']+'/'+CONF['repository'])
     raw='https://raw.githubusercontent.com/'+repository+'/'+CONF['branch']+'/'
     refs={}
@@ -272,12 +350,34 @@ def main():
     for u,new in sorted(replacements.items(),key=lambda t:len(t[0]),reverse=True):
         full=full.replace(u,new);ad=ad.replace(u,new);feature=feature.replace(u,new)
     full=full.replace('# 合并日期：2026-10-05；规则固定快照，远程脚本继续依赖各上游。','# 本文件由GitHub Actions自动构建；核心规则和已缓存引用按计划更新。')
+    # Duplicate standalone rule rows use first-match precedence. Do not reorder them.
+    seen_rules = set(); unique_rules = []
+    for row in read_sections(full)['[Rule]']:
+        if row.strip() and not row.lstrip().startswith('#'):
+            normalized = ','.join(f.strip() for f in row.split(','))
+            if normalized in seen_rules: continue
+            seen_rules.add(normalized)
+        unique_rules.append(row)
+    full = replace_section(full, '[Rule]', '\n'.join(unique_rules))
+    # New financial routes must never expand the HTTPS decryption scope.
+    exclusions = set()
+    for row in routing.splitlines():
+        f = row.split(',')
+        if len(f) >= 3 and f[2] in {'🏦 汇丰香港', '🏦 香港银行', '📈 券商服务'} and f[0] in {'DOMAIN', 'DOMAIN-SUFFIX'}:
+            exclusions.add('-'+f[1])
+            if f[0] == 'DOMAIN-SUFFIX': exclusions.add('-*.'+f[1])
+    mitm = read_sections(full)['[MITM]']
+    for i, row in enumerate(mitm):
+        if row.startswith('hostname'):
+            hosts = [h.strip() for h in row.split('=', 1)[1].split(',')]
+            mitm[i] = 'hostname = '+','.join(dict.fromkeys(hosts+sorted(exclusions)))
+    full = replace_section(full, '[MITM]', '\n'.join(mitm))
     n=validate(full,ad,feature)
     dist=ROOT/'dist';dist.mkdir(exist_ok=True)
     for name,text in [('shadowrocket.conf',full),('adblock.sgmodule',ad),('enhance.sgmodule',feature)]:
         (dist/name).write_text(text)
     # Stable report: changes only when source bytes/status change, not on every timer tick.
-    report={'repository':repository,'ad_rules':n,'references':results,'scope':'核心广告库和实际引用的远程规则/脚本；原生匹配器来自审查后的profiles快照','runtime_tested':False}
+    report={'repository':repository,'ad_rules':n,'routing_merge':routing_counts,'references':results,'scope':'核心广告库、LingJing分流补充与实际引用的远程规则/脚本；原生匹配器来自审查后的profiles快照','runtime_tested':False}
     (dist/'update-report.json').write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n')
     unavailable=sum(r['status']=='unavailable' for r in results)
     print(json.dumps({'ad_rules':n,'remote_references':len(refs),'mirrored':len(replacements),'unavailable':unavailable,'repository':repository},ensure_ascii=False))

@@ -31,5 +31,98 @@
     }
   ],
   "max_ad_rules": 20000,
-  "sdk_selector": "pangolin|pglstatp|sigmob|tanx|beizi|oceanengine|adash|ksad|mobads|guangdiantong|youmi|adservice"
+  "sdk_selector": "pangolin|pglstatp|sigmob|tanx|beizi|oceanengine|adash|ksad|mobads|guangdiantong|youmi|adservice",
+  "routing_sources": [
+    {
+      "name": "code",
+      "policy": "🚀 策略选择",
+      "urls": [
+        "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/GitHub/GitHub.list",
+        "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/GitLab/GitLab.list",
+        "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Atlassian/Atlassian.list"
+      ]
+    },
+    {
+      "name": "lan",
+      "policy": "DIRECT",
+      "urls": [
+        "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Lan/Lan.list"
+      ]
+    },
+    {
+      "name": "httpdns",
+      "policy": "🧱 HTTPDNS",
+      "urls": [
+        "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/BlockHttpDNS/BlockHttpDNS.list"
+      ]
+    },
+    {
+      "name": "mail",
+      "policy": "📧 邮件服务",
+      "urls": [
+        "https://raw.githubusercontent.com/LingJingMaster/Shadowrocket-Rules/main/Mail.list"
+      ]
+    },
+    {
+      "name": "push",
+      "policy": "🍎 苹果推送",
+      "urls": [
+        "https://raw.githubusercontent.com/LingJingMaster/Shadowrocket-Rules/main/ApplePush.list"
+      ]
+    },
+    {
+      "name": "hsbc",
+      "policy": "🏦 汇丰香港",
+      "urls": [
+        "https://raw.githubusercontent.com/LingJingMaster/Shadowrocket-Rules/main/HSBC_HK.list"
+      ]
+    },
+    {
+      "name": "banks",
+      "policy": "🏦 香港银行",
+      "urls": [
+        "https://raw.githubusercontent.com/LingJingMaster/Shadowrocket-Rules/main/HK_Banks_Direct.list"
+      ]
+    },
+    {
+      "name": "broker",
+      "policy": "📈 券商服务",
+      "urls": [
+        "https://raw.githubusercontent.com/LingJingMaster/Shadowrocket-Rules/main/HK_Broker.list"
+      ]
+    },
+    {
+      "name": "google",
+      "policy": "🔍 谷歌服务",
+      "urls": [
+        "https://raw.githubusercontent.com/LingJingMaster/Shadowrocket-Rules/main/Google.list",
+        "https://yfamilys.com/rule/Google.list"
+      ]
+    },
+    {
+      "name": "ai",
+      "policy": "🤖️ 人工智能",
+      "urls": [
+        "https://raw.githubusercontent.com/LingJingMaster/Shadowrocket-Rules/main/AI.list",
+        "https://yfamilys.com/rule/ai.list"
+      ]
+    },
+    {
+      "name": "apple",
+      "policy": "🍎 苹果服务",
+      "urls": [
+        "https://raw.githubusercontent.com/LingJingMaster/Shadowrocket-Rules/main/Apple.list",
+        "https://yfamilys.com/rule/Apple.list",
+        "https://yfamilys.com/rule/AppStore.list"
+      ]
+    }
+  ],
+  "routing_prefix": [
+    "DOMAIN-SUFFIX,doubao.com,DIRECT",
+    "DOMAIN-SUFFIX,deepseek.com,DIRECT",
+    "DOMAIN-SUFFIX,deepseeksvc.com,DIRECT",
+    "DOMAIN,translate.googleapis.com,📹 YouTube",
+    "DOMAIN,translate-pa.googleapis.com,📹 YouTube",
+    "AND,((PROTOCOL,TCP),(DST-PORT,5223)),🍎 苹果推送"
+  ]
 }

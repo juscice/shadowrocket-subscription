@@ -1,6 +1,63 @@
 {
   "repository": "juscice/shadowrocket-subscription",
   "ad_rules": 6879,
+  "routing_merge": {
+    "code": {
+      "input": 42,
+      "kept": 42,
+      "removed": 0
+    },
+    "lan": {
+      "input": 140,
+      "kept": 140,
+      "removed": 0
+    },
+    "httpdns": {
+      "input": 63,
+      "kept": 63,
+      "removed": 0
+    },
+    "mail": {
+      "input": 16,
+      "kept": 16,
+      "removed": 0
+    },
+    "push": {
+      "input": 4,
+      "kept": 1,
+      "removed": 3
+    },
+    "hsbc": {
+      "input": 2,
+      "kept": 2,
+      "removed": 0
+    },
+    "banks": {
+      "input": 39,
+      "kept": 39,
+      "removed": 0
+    },
+    "broker": {
+      "input": 170,
+      "kept": 148,
+      "removed": 22
+    },
+    "google": {
+      "input": 1419,
+      "kept": 711,
+      "removed": 708
+    },
+    "ai": {
+      "input": 209,
+      "kept": 170,
+      "removed": 39
+    },
+    "apple": {
+      "input": 96,
+      "kept": 51,
+      "removed": 45
+    }
+  },
   "references": [
     {
       "url": "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/BanAD.list",
@@ -21,6 +78,108 @@
       "url": "https://raw.githubusercontent.com/NobyDa/Script/master/Surge/AdRule.list",
       "status": "ok",
       "sha256": "db0b0aeb1395f85bb524681825660928a5ca808bce2410cf4c8fe8ab6f332f57"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/GitHub/GitHub.list",
+      "status": "ok",
+      "sha256": "ced8ab0ecda5775d04ec8ee6a57b282181108565331a6a1d85e9a26fee25d79b",
+      "path": "upstream/routing/92a3ee8c827a17e2e4e5.list"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/GitLab/GitLab.list",
+      "status": "ok",
+      "sha256": "0c41418dd3d49d6313c5516b1d828a39aa13e1c08b9750698b5e4ec5d7ba5f8c",
+      "path": "upstream/routing/2498e1b0a77b8f17fbc4.list"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Atlassian/Atlassian.list",
+      "status": "ok",
+      "sha256": "243613384193edb80bcc0ee4106fc2b110c23b7c32f46258947be453f483ab9f",
+      "path": "upstream/routing/3c7ef5ccec3c3c081048.list"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Lan/Lan.list",
+      "status": "ok",
+      "sha256": "e524edec216ed7f2fa2f3eb3fe09fe70121acf88408c2394d19b3e2331c54de7",
+      "path": "upstream/routing/e3b69cd215b215607f96.list"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/BlockHttpDNS/BlockHttpDNS.list",
+      "status": "ok",
+      "sha256": "2d44341f27493c165df1e2ea695e5e566d44e361dd84eee40145984cad3da6b4",
+      "path": "upstream/routing/833560b575001bc744d6.list"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/LingJingMaster/Shadowrocket-Rules/main/Mail.list",
+      "status": "ok",
+      "sha256": "e07632eba794d965aa728d2fab7468704037e030b21e34127d77f1aacd153db0",
+      "path": "upstream/routing/9a87ad17d1885c1ed024.list"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/LingJingMaster/Shadowrocket-Rules/main/ApplePush.list",
+      "status": "ok",
+      "sha256": "078500e904a024b4efe3fb5c0637bf4271514ed5b91100feed98588e6564eae8",
+      "path": "upstream/routing/cab1c1c06f869894b903.list"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/LingJingMaster/Shadowrocket-Rules/main/HSBC_HK.list",
+      "status": "ok",
+      "sha256": "9dc67e45c4f2eedfee1ab7f2a5c143c866380f56db3e2d3e4f83adb5927a187b",
+      "path": "upstream/routing/f0c4ccedb73c49d3baf9.list"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/LingJingMaster/Shadowrocket-Rules/main/HK_Banks_Direct.list",
+      "status": "ok",
+      "sha256": "c7bc002172b6fc691fc18cd9d267dab05eed54d8878dcc4774d9dcdfae9cc145",
+      "path": "upstream/routing/4cf4ffe0f3a9a32a8761.list"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/LingJingMaster/Shadowrocket-Rules/main/HK_Broker.list",
+      "status": "ok",
+      "sha256": "8ab40480d0438c6ffd294ad62bdbf286174ee972430cee52aa0122f1db6f1174",
+      "path": "upstream/routing/c775058f07dc21a44033.list"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/LingJingMaster/Shadowrocket-Rules/main/Google.list",
+      "status": "ok",
+      "sha256": "f6eeba7b8465bec2b01950194746e7ed3d091931eb42b8fcc7d011a4b57b25c4",
+      "path": "upstream/routing/b1a2030a55c29bafbfcc.list"
+    },
+    {
+      "url": "https://yfamilys.com/rule/Google.list",
+      "status": "ok",
+      "sha256": "2b2f043fcace2302888714936123c3875703801506f9fb1174b19e36ec833ea4",
+      "path": "upstream/routing/a15d5e3af5b8341a5f14.list"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/LingJingMaster/Shadowrocket-Rules/main/AI.list",
+      "status": "ok",
+      "sha256": "437ecda2f8736d829eda5b702b0802c53f71031a911f1332234d42c099ad3728",
+      "path": "upstream/routing/1ac7a77275b6bd261669.list"
+    },
+    {
+      "url": "https://yfamilys.com/rule/ai.list",
+      "status": "ok",
+      "sha256": "e3f86cb8e7199754c3b888c3741e08bebfc96c7363ff0b44f641033cc66cae18",
+      "path": "upstream/routing/1b59c12c1d96df3ce767.list"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/LingJingMaster/Shadowrocket-Rules/main/Apple.list",
+      "status": "ok",
+      "sha256": "1807a7c3357908e0a1c09eb6adc0be6106b59d2e2bc795f600470f6fdc73491a",
+      "path": "upstream/routing/79ed93fb3287f2eb9aa8.list"
+    },
+    {
+      "url": "https://yfamilys.com/rule/Apple.list",
+      "status": "ok",
+      "sha256": "cf114bc900fb883b25fc7011eb7593f7cdfc2b5160f1ef21d8ef5df5b9cdc132",
+      "path": "upstream/routing/ea295cb05cc441dc63ba.list"
+    },
+    {
+      "url": "https://yfamilys.com/rule/AppStore.list",
+      "status": "ok",
+      "sha256": "20062ff2d80616e5fbdb360b54c8a9f184e8ec5be47601a4dd79345e8892ec4f",
+      "path": "upstream/routing/1741f7c34dacaad4d74b.list"
     },
     {
       "url": "https://gist.github.com/RavelloH/68ed0626dae69a1ce7c8ad6887087ea1/raw/c008127260bc4dcd550fcd98285048cf6176f602/main.js",
@@ -1487,18 +1646,6 @@
       "path": "upstream/rules/95b0870ed5c17814801e.list"
     },
     {
-      "url": "https://yfamilys.com/rule/AppStore.list",
-      "status": "ok",
-      "sha256": "20062ff2d80616e5fbdb360b54c8a9f184e8ec5be47601a4dd79345e8892ec4f",
-      "path": "upstream/rules/1741f7c34dacaad4d74b.list"
-    },
-    {
-      "url": "https://yfamilys.com/rule/Apple.list",
-      "status": "ok",
-      "sha256": "cf114bc900fb883b25fc7011eb7593f7cdfc2b5160f1ef21d8ef5df5b9cdc132",
-      "path": "upstream/rules/ea295cb05cc441dc63ba.list"
-    },
-    {
       "url": "https://yfamilys.com/rule/AppleProxy.list",
       "status": "ok",
       "sha256": "80b0c2a76f3ff1484ae4e1880a95ff713d537076f35f2385b72ed23dbb96d561",
@@ -1551,12 +1698,6 @@
       "status": "ok",
       "sha256": "02969a9cf7cf0ec10d8266cab49ca31eaad71f852691eaf28a23c76b235d95bc",
       "path": "upstream/rules/e8b44e4fb7ef4aaeb9e1.list"
-    },
-    {
-      "url": "https://yfamilys.com/rule/Google.list",
-      "status": "ok",
-      "sha256": "2b2f043fcace2302888714936123c3875703801506f9fb1174b19e36ec833ea4",
-      "path": "upstream/rules/a15d5e3af5b8341a5f14.list"
     },
     {
       "url": "https://yfamilys.com/rule/Microsoft.list",
@@ -1671,14 +1812,8 @@
       "status": "ok",
       "sha256": "38ef27370abfb73bcc06356eb4eba3a0779c5b1388b016c6e46f010b2279ed55",
       "path": "upstream/rules/62da7cb2eb86731ec2f5.list"
-    },
-    {
-      "url": "https://yfamilys.com/rule/ai.list",
-      "status": "ok",
-      "sha256": "e3f86cb8e7199754c3b888c3741e08bebfc96c7363ff0b44f641033cc66cae18",
-      "path": "upstream/rules/1b59c12c1d96df3ce767.list"
     }
   ],
-  "scope": "核心广告库和实际引用的远程规则/脚本；原生匹配器来自审查后的profiles快照",
+  "scope": "核心广告库、LingJing分流补充与实际引用的远程规则/脚本；原生匹配器来自审查后的profiles快照",
   "runtime_tested": false
 }

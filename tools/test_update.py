@@ -77,4 +77,43 @@ class UpdateTests(unittest.TestCase):
         feature = (u.ROOT/'profiles/enhance.sgmodule').read_text()
         with self.assertRaisesRegex(ValueError, 'private certificate'):
             u.validate_public_contract(full, ad, feature)
+    def test_routing_does_not_become_ad_blocking(self):
+        self.assertEqual(u.canonical_routing_rule('DOMAIN,MAIL.Example.COM.,DIRECT'), 'DOMAIN,mail.example.com')
+        self.assertEqual(u.canonical_routing_rule('IP-CIDR,10.1.2.3/8,no-resolve'), 'IP-CIDR,10.0.0.0/8,no-resolve')
+        with self.assertRaises(ValueError): u.canonical_routing_rule('FINAL,DIRECT')
+    def test_routing_dedup_suffix_and_network_coverage(self):
+        rows = ['DOMAIN,api.example.com', 'DOMAIN-SUFFIX,example.com',
+                'DOMAIN-SUFFIX,sub.example.com', 'DOMAIN-SUFFIX,example.com',
+                'IP-CIDR,10.0.0.0/8,no-resolve', 'IP-CIDR,10.1.0.0/16,no-resolve']
+        self.assertEqual(u.deduplicate_routing(rows), ['DOMAIN-SUFFIX,example.com', 'IP-CIDR,10.0.0.0/8,no-resolve'])
+    def test_routing_failure_keeps_valid_cache(self):
+        import io
+        with tempfile.TemporaryDirectory() as d:
+            p=Path(d)/'source.list';p.write_text('DOMAIN-SUFFIX,bank.example.com\n')
+            with patch.object(u.urllib.request,'urlopen',return_value=io.BytesIO(b'FINAL,REJECT')):
+                result=u.fetch('https://example.com/list',p,content_kind='routing')
+            self.assertEqual(result['status'],'fallback')
+            self.assertEqual(p.read_text(),'DOMAIN-SUFFIX,bank.example.com\n')
+    def test_precise_policy_exception_survives_broad_fallback(self):
+        import hashlib
+        with tempfile.TemporaryDirectory() as d:
+            sources=[{'name':'push','policy':'PUSH','urls':['https://example.com/push']},
+                     {'name':'apple','policy':'APPLE','urls':['https://example.com/apple']}]
+            cache=Path(d);(cache/'routing').mkdir()
+            for url,rows in [('https://example.com/push','DOMAIN-SUFFIX,push.apple.com\n'),
+                             ('https://example.com/apple','DOMAIN-SUFFIX,apple.com\nDOMAIN-SUFFIX,push.apple.com\n')]:
+                (cache/'routing'/(hashlib.sha256(url.encode()).hexdigest()[:20]+'.list')).write_text(rows)
+            with patch.object(u,'CACHE',cache),patch.object(u,'ROOT',cache),patch.object(u,'CONF',{'routing_sources':sources}):
+                rows,_,counts=u.build_routing(True)
+            self.assertIn('DOMAIN-SUFFIX,push.apple.com,PUSH',rows)
+            self.assertIn('DOMAIN-SUFFIX,apple.com,APPLE',rows)
+            self.assertNotIn('DOMAIN-SUFFIX,push.apple.com,APPLE',rows)
+    def test_new_groups_have_portable_defaults(self):
+        full=(u.ROOT/'profiles/full.conf').read_text()
+        for name in ['📧 邮件服务','🍎 苹果推送','📈 券商服务','🔍 谷歌服务']:
+            row=next(l for l in full.splitlines() if l.startswith(name+' ='))
+            self.assertEqual(row.split('=',1)[1].strip().split(',')[1],'🚀 策略选择')
+        for name in ['🏦 汇丰香港','🏦 香港银行']:
+            row=next(l for l in full.splitlines() if l.startswith(name+' ='))
+            self.assertEqual(row.split('=',1)[1].strip().split(',')[1],'DIRECT')
 if __name__=='__main__':unittest.main()

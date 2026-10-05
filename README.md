@@ -222,3 +222,37 @@ python3 tools/update.py
 - [Reqable 官方文档源码：iOS 证书及无法解密的情况](https://github.com/reqable/reqable-docs/blob/master/zh-CN/getting-started/installation/index.md)。
 
 说明核对日期：2026-10-05。本文不附带任何真实证书、私钥或账户凭据。流程图为操作示意，并非 App 官方界面截图。
+
+
+## LingJingMaster 分流合并（2026-10-05）
+
+新增来源：[LingJingMaster/Shadowrocket-Rules](https://github.com/LingJingMaster/Shadowrocket-Rules)。完整配置合并其 8 份 AI、Google、Apple、ApplePush、Mail、HSBC_HK、HK_Banks_Direct、HK_Broker 规则；保留原有 AI、Google、Apple 和 App Store 库的补充覆盖。另补齐该配置引用的局域网、HTTPDNS、GitHub、GitLab、Atlassian 分流。
+
+| 功能 | 默认策略 | 说明 |
+| --- | --- | --- |
+| 邮件协议端点 | 主策略 | 可切换直连或地区节点；先于 Google、Apple 通用规则 |
+| Apple 推送 | 主策略 | 推送域名与 TCP 5223；可手动改直连 |
+| Google / Gemini | 主策略 | 可选日本、香港或直连 |
+| AI | 主策略 | 不强制要求美国节点；豆包、DeepSeek 前置直连 |
+| 汇丰香港、其他香港银行 | DIRECT | 银行专用规则先于通用分流 |
+| 券商 | 主策略 | 可选香港或直连；广告库仍先拦截广告与跟踪端点 |
+| HTTPDNS | REJECT | 微信两个 DNS 域名前置直连；异常时可在此策略组改 DIRECT |
+| 局域网 / 代码托管 | DIRECT / 主策略 | 补充私有网络及 GitHub、GitLab、Atlassian |
+
+`sources.json` 的 `routing_sources` 明确列出批准的分流来源，`routing_prefix` 维护需要优先匹配的例外。每次自动更新重新下载、验证和合并，生成到完整配置的 `BEGIN GENERATED ROUTING` 区段；两份独立模块继续用于去广告和请求增强，不携带依赖主配置策略组的分流规则。
+
+去重包含规范化域名/CIDR、同策略完全重复、域名后缀包含和子网包含；不同策略的父子域名保持先后顺序，例如推送域名优先、Apple 通用规则随后。相同匹配器冲突保留先出现的策略。新增银行和券商域名同时加入完整配置的 HTTPS 解密排除项。没有直接照搬地区默认值、系统 DNS 替换或整个 China / Global 大库；已有国内和代理分流承担通用覆盖。
+
+`dist/update-report.json` 的 `routing_merge` 记录每组输入、保留及去除数量，`references` 记录来源与缓存状态。分流来源首次无有效缓存时停止发布；下载失败或格式损坏时使用最近有效缓存。上游分流内容更新会触发新的生成结果，订阅地址不变。
+
+保留上游 MIT 授权：[`licenses/LingJingMaster-MIT.txt`](licenses/LingJingMaster-MIT.txt)。
+
+进一步检查生成文件：
+
+```bash
+python3 tools/test_update.py
+python3 tools/update.py --offline
+python3 tools/verify_release.py
+```
+
+检查覆盖依赖文件、17 项回归测试、脚本语法、HTTP 正则、微信读书开启状态及邮件/银行/推送/AI等代表域名的分流优先级。未在 iPhone 真机执行所有 App，不能以构建通过替代实际广告效果、证书解密和节点连通性测试。
