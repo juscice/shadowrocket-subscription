@@ -46,6 +46,8 @@ jobs:
         run: python3 tools/test_update.py
       - name: Refresh and validate
         run: python3 tools/update.py
+      - name: Audit generated subscriptions
+        run: python3 tools/verify_release.py
       - name: Commit changed subscription files
         run: |
           git config user.name 'github-actions[bot]'
