@@ -1,0 +1,205 @@
+#!name=ShadowStore × yfamily 功能增强整合
+#!desc=原功能增强 + RevenueCat多App、WPS、XMind、Notability、Spotify等会员响应改写；微信读书旧版已启用
+# 来源：https://shadowstore.dpdns.org/ + https://yfamilys.com/shadowrocket
+# 合并日期：2026-10-05；规则固定快照，远程脚本继续依赖各上游。
+# 已对重复请求处理选择覆盖更全且当前可读取的实现。
+
+
+# 2026-10-05 GitHub会员功能增补：实验性响应改写；微信读书旧版项 enable=true。
+
+[URL Rewrite]
+^https?:\/\/(www.)?(g|google)\.cn https://www.google.com 302
+^https?:\/\/(ditu|maps).google\.cn https://maps.google.com 302
+^http:\/\/(www.)?taobao\.com\/ https://taobao.com/ 302
+^http:\/\/(www.)?jd\.com\/ https://www.jd.com/ 302
+^http:\/\/(www.)?mi\.com\/ https://www.mi.com/ 302
+^http:\/\/you\.163\.com\/ https://you.163.com/ 302
+^http:\/\/(www.)?suning\.com\/ https://suning.com/ 302
+^http:\/\/(www.)?yhd\.com\/ https://yhd.com/ 302
+^https?:\/\/(www.)?ign\.xn--fiqs8s\/ https://cn.ign.com/ccpref/us 302
+^https?:\/\/(www.)?abbyychina\.com\/ https://www.abbyy.cn/ 302
+^https?:\/\/(www.)?alienskins\.cn\/ https://exposure.software/ 302
+^https?:\/\/(www.)?anydeskchina\.cn\/ https://anydesk.com/zhs 302
+^https?:\/\/(www.)?bartender\.cc\/ https://www.macbartender.com/ 302
+^https?:\/\/(www.)?(betterzipcn|betterzip)\.(com|net)\/ https://macitbetter.com/ 302
+^https?:\/\/(www.)?beyondcompare\.cc\/ https://www.scootersoftware.com/ 302
+^https?:\/\/(www.)?bingdianhuanyuan\.cn\/ https://www.faronics.com/zh-hans/ 302
+^https?:\/\/(www.)?chemdraw\.com\.cn\/ https://www.perkinelmer.com.cn/ 302
+^https?:\/\/(www.)?codesoftchina\.com\/ https://www.teklynx.com/ 302
+^https?:\/\/(www.)?coreldrawchina\.com\/ https://www.coreldraw.com/cn/ 302
+^https?:\/\/(www.)?crossoverchina\.com\/ https://www.codeweavers.com/ 302
+^https?:\/\/(www.)?dongmansoft\.com\/ https://www.udongman.cn/ 302
+^https?:\/\/(www.)?earmasterchina\.cn\/ https://www.earmaster.com/ 302
+^https?:\/\/(www.)?easyrecoverychina\.com\/ https://www.ontrack.com/ 302
+^https?:\/\/(www.)?ediuschina\.com\/ https://www.grassvalley.com/ 302
+^https?:\/\/(www.)?firefox\.com\.cn\/(download\/)?$ https://www.mozilla.org/zh-CN/firefox/new/ 302
+^https?:\/\/(www.)?flstudiochina\.com\/ https://www.image-line.com/ 302
+^https?:\/\/(www.)?folxchina\.cn\/ https://mac.eltima.com/cn/download-manager.html 302
+^https?:\/\/(www.)?formysql\.com\/ https://www.navicat.com.cn/ 302
+^https?:\/\/(www.)?guitarpro\.cc\/ https://www.guitar-pro.com/ 302
+^https?:\/\/(www.)?huishenghuiying\.com\.cn\/ https://www.coreldraw.com/cn/ 302
+^https?:\/\/(www.)?hypeapp\.cn\/ https://tumult.com/hype/ 302
+^https?:\/\/hypersnap\.mairuan\.com\/ https://www.hyperionics.com/ 302
+^https?:\/\/(www.)?iconworkshop\.cn\/ https://www.axialis.com/ 302
+^https?:\/\/(www.)?idmchina\.net\/ https://www.internetdownloadmanager.com/ 302
+^https?:\/\/(www.)?imazingchina\.com\/ https://imazing.com/zh 302
+^https?:\/\/(www.)?imindmap\.cc\/ https://www.ayoa.com/previously-imindmap/ 302
+^https?:\/\/(www.)?jihehuaban\.com\.cn\/ https://www.chartwellyorke.com/sketchpad/x24795.html 302
+^https?:\/\/(www.)?kingdeecn\.cn\/ http://www.kingdee.com/ 302
+^https?:\/\/(www.)?logoshejishi\.com\/ https://www.sothink.com/product/logo-design-software/ 302
+^https?:\/\/logoshejishi\.mairuan\.com\/ https://www.sothink.com/product/logo-design-software/ 302
+^https?:\/\/(www.)?luping\.net\.cn\/ https://www.techsmith.com/ 302
+^https?:\/\/(www.)?mathtype\.cn\/ https://www.dessci.com/ 302
+^https?:\/\/(www.)?mindmanager\.(cc|cn)\/ https://www.mindjet.com/cn/ 302
+^https?:\/\/(www.)?mindmapper\.cc\/ https://www.mindmapper.com/ 302
+^https?:\/\/(www.)?(mycleanmymac|xitongqingli)\.com\/ https://macpaw.com/ 302
+^https?:\/\/(www.)?nicelabel\.cc\/ https://www.nicelabel.com/zh/ 302
+^https?:\/\/(www.)?ntfsformac\.cn\/ https://china.paragon-software.com/home-mac/ntfs-for-mac/ 302
+^https?:\/\/(www.)?officesoftcn\.com\/ https://www.microsoft.com/zh-cn/microsoft-365 302
+^https?:\/\/(www.)?overturechina\.com\/ https://sonicscores.com/ 302
+^https?:\/\/(www.)?passwordrecovery\.cn\/ https://cn.elcomsoft.com/aopr.html 302
+^https?:\/\/(www.)?pdfexpert\.cc\/ https://pdfexpert.com/zh 302
+^https?:\/\/(www.)?photozoomchina\.com\/ https://www.benvista.com/ 302
+^https?:\/\/(www.)?shankejingling\.com\/ https://www.sothink.com/product/flashdecompiler/ 302
+^https?:\/\/cn\.ultraiso\.net\/ https://cn.ezbsystems.com/ultraiso/ 302
+^https?:\/\/(www.)?vegaschina\.cn\/ https://www.vegascreativesoftware.com/ 302
+^https?:\/\/(www.)?xshellcn\.com\/ https://www.netsarang.com/zh/xshell/ 302
+^https?:\/\/(www.)?yuanchengxiezuo\.com\/ https://www.teamviewer.com/ 302
+^https?:\/\/(www.)?zbrushcn\.com\/ https://pixologic.com/ 302
+^https?:\/\/links\.jianshu\.com\/go\?to=(.*) $1 302
+^https?:\/\/www\.jianshu\.com\/go-wild\?ac=\d&url=(.*) $1 302
+^https?:\/\/link\.zhihu\.com\/\?target=(.*) $1 302
+(^https?:\/\/)?t\.me\/(.+) sg://resolve?domain=$2 302
+(^https?:\/\/ptf\.flyertrip\.com\/forum\/\d{4}(\/)?\d{2}\/\d{2}\/[0-9A-Za-z]+\.(png|jpg|jpeg|gif|bmp|webp))!o.*$ $1 302
+^https?:\/\/surge\.app\/(install.*) surge:///$1 302
+^https?:\/\/duckduckgo\.com\/\?q=yd\+([^&]+).+ https://dict.youdao.com/search?q=$1 302
+^https?:\/\/duckduckgo\.com\/\?q=tc\+([^&]+).+ https://translate.google.com/#view=home&op=translate&sl=auto&tl=zh-CN&text=$1 302
+^https?:\/\/duckduckgo\.com\/\?q=te\+([^&]+).+ https://translate.google.com/#view=home&op=translate&sl=auto&tl=en&text=$1 302
+^https?:\/\/duckduckgo\.com\/\?q=tj\+([^&]+).+ https://translate.google.com/#view=home&op=translate&sl=auto&tl=ja&text=$1 302
+^https?:\/\/duckduckgo\.com\/\?q=db\+([^&]+).+ https://m.douban.com/search?query=$1 302
+^https?:\/\/duckduckgo\.com\/\?q=zh\+([^&]+).+ http://www.zhihu.com/search?q=$1 302
+^https?:\/\/duckduckgo\.com\/\?q=gh\+([^&]+).+ https://github.com/search?q=$1 302
+^https?:\/\/duckduckgo\.com\/\?q=v2\+([^&]+).+ https://www.google.com/search?q=site:v2ex.com/t $1 302
+^https?:\/\/duckduckgo\.com\/\?q=ssp\+([^&]+).+ https://sspai.com/search/post/$1 302
+^https?:\/\/duckduckgo\.com\/\?q=yt\+([^&]+).+ https://www.youtube.com/results?search_query=$1 302
+^https?:\/\/duckduckgo\.com\/\?q=bl\+([^&]+).+ https://m.bilibili.com/search?keyword=$1 302
+^https?:\/\/duckduckgo\.com\/\?q=bd\+([^&]+).+ https://www.baidu.com/s?wd=$1 302
+^https?:\/\/duckduckgo\.com\/\?q=wk\+([^&]+).+ https://zh.wikipedia.org/wiki/$1 302
+^https?:\/\/duckduckgo\.com\/\?q=yh\+([^&]+).+ https://greasyfork.org/zh-CN/scripts?q=$1 302
+^https?:\/\/duckduckgo\.com\/\?q=gi\+([^&]+).+ https://www.google.com/search?&tbm=isch&q=$1 302
+^https?:\/\/duckduckgo\.com\/\?q=by\+([^&]+).+ https://www.bing.com/search?q=$1 302
+^https?:\/\/duckduckgo\.com\/\?q=qm\+([^&]+).+ https://www.qimai.cn/search/index/search/$1 302
+^https?:\/\/duckduckgo\.com\/\?q=dd\+([^&]+).+ https://devdocs.io/#q=$1 302
+(^https?:\/\/[\w-]+\.googlevideo\.com\/(?!dclk_video_ads).+?)&ctier=L(&.+?),ctier,(.+) $1$2$3 302
+^https?://you\.163\.com/ https://you.163.com/ 302
+^https?://translate\.google\.cn https://translate.google.com 302
+^https?://(www.)?zbrushcn.com/ https://pixologic.com/ 302
+^https?://(www.)?yhd\.com/ https://yhd.com/ 302
+^https?://(www.)?taobao\.com/ https://taobao.com/ 302
+^https?://(www.)?suning\.com/ https://suning.com/ 302
+^https?://(www.)?ntfsformac\.cc/ https://www.tuxera.com/products/tuxera-ntfs-for-mac-cn/ 302
+^https?://(www.)?mi\.com/ https://www.mi.com/ 302
+^https?://(www.)?logoshejishi\.com https://www.sothink.com/product/logo-design-software/ 302
+^https?://(www.)?jd\.com/ https://www.jd.com/ 302
+^https?://(ditu|maps)\.google\.cn https://maps.google.com 302
+^https:\/\/link\.zhihu\.com\/\?target=(https?)?(%3A|:)?(\/\/|%2F%2F)?(.*?)(&source.*)?$ http://$4 302
+^http://(www.)?aicoin\.cn/$ https://www.aicoin.com/ 302
+(^https?://passport\.biliintl\.com/x/intl/passport-login/.+)(&s_locale=zh-Hans_[A-Z]{2})(.+)(&sim_code=\d+)(.+) $1&s_locale=zh-Hans_PH$35&sim_code=51503$5 302
+(^https?://app\.biliintl\.com/(x/)?(intl|dm|reply|history|v\d/(fav|msgfeed)).+?)(&s_locale=zh-Hans_[A-Z]{2})(.+?)(&sim_code=\d+)(.+) $1&s_locale=zh-Hans_PH$6&sim_code=51503$8 302
+^https?://www\.google\.com/search\?q=%E6%A8%A1%E5%9D%97.*$ https://yfamilys.com/shadowrocket 302
+^https?://www\.google\.com/search\?q=%E6%8F%92%E4%BB%B6.*$ https://yfamilys.com/loon 302
+^https?://www\.google\.com/search\?q=%E9%87%8D%E5%86%99.*$ https://yfamilys.com/quantumultx 302
+^https?://www\.google\.com/search\?q=sg.*$ https://yfamilys.com/surge 302
+^https?://www\.google\.com/search\?q=%E8%A6%86%E5%86%99.*$ https://yfamilys.com/stash 302
+^https:\/\/www\.google\.com\/search\?q=wk(\+|%20)([^&]+).+ https://zh.wikipedia.org/wiki/$2 302
+^https:\/\/www\.google\.com\/search\?q=bd(\+|%20)([^&]+).+ https://www.baidu.com/s?wd=$2 302
+^https:\/\/www\.google\.com\/search\?q=gh(\+|%20)([^&]+).+ https://github.com/search?q=$2 302
+^https:\/\/www\.google\.com\/search\?q=gi(\+|%20)([^&]+).+ https://www.google.com/search?&tbm=isch&q=$2 302
+^https:\/\/www\.google\.com\/search\?q=yd(\+|%20)([^&]+).+ https://dict.youdao.com/search?q=$2 302
+^https:\/\/www\.google\.com\/search\?q=trc(\+|%20)([^&]+).+ https://translate.google.com/#view=home&op=translate&sl=auto&tl=zh-CN&text=$2 302
+^https:\/\/www\.google\.com\/search\?q=tre(\+|%20)([^&]+).+ https://translate.google.com/#view=home&op=translate&sl=auto&tl=en&text=$2 302
+^https:\/\/www\.google\.com\/search\?q=db(\+|%20)([^&]+).+ https://www.douban.com/search?q=$2 302
+^https:\/\/www\.google\.com\/search\?q=zh(\+|%20)([^&]+).+ https://www.zhihu.com/search?q=$2 302
+^https:\/\/www\.google\.com\/search\?q=wb(\+|%20)([^&]+).+ https://s.weibo.com/weibo/$2 302
+^https:\/\/www\.google\.com\/search\?q=ddg(\+|%20)([^&]+).+ https://duckduckgo.com/?ia=about&q=$2 302
+^https:\/\/www\.google\.com\/search\?q=bi(\+|%20)([^&]+).+ http://www.bing.com/search?q=$2 302
+^https://oia\.zhihu\.com/articles/([0-9]+)\?.* https://zhuanlan.zhihu.com/p/$1 307
+^https://oia\.zhihu\.com/answers/([0-9]+)\?.* https://www.zhihu.com/answer/$1 307
+^https?://link\.zhihu\.com/\?target=(https?)%3A//(.*) $1://$2 307
+
+[Body Rewrite]
+http-response-jq ^https?:\/\/app\.mieco\.net\/api\/utrend-printing\/buttonConfig\/1(?:\?.*)?$ '.data |= map(select((.name != "首页" or true != true) and (.name != "社区" or true != true) and (.name != "创意" or true != true) and (.name != "消息" or true != true) and (.name != "我的" or false != true)))'
+http-response-jq ^https?:\/\/app\.mieco\.net\/api\/utrend-printing\/users(?:\?.*)?$ 'if true then .data.background = "" | .data.userLevelIcon = "" | .data.userLevel = 0 | .data.experience = 0 else . end'
+
+[Header Rewrite]
+http-request ^https://www\.zhihu\.com\/(question|topic) header-replace User-Agent "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36"
+
+# RevenueCat/Spotify会员接口缓存控制已随上游脚本处理
+http-request ^https:\/\/(spclient\.wg\.spotify\.com|.*-spclient\.spotify\.com(:443)?)\/user-customization-service\/v1\/customize$ header-del if-none-match
+
+[Script]
+feature_0001 = type=http-request, script-path=https://lowertop.github.io/Shadowrocket-First/JS/github-header.js, pattern=^https:\/\/[a-z0-9-]+\.githubusercontent\.com, max-size=0, timeout=30, script-update-interval=0, enable=true
+feature_0002 = type=http-request, pattern=^https?:\/\/gql(-fed)?\.reddit\.com, script-path=https://gist.github.com/RavelloH/68ed0626dae69a1ce7c8ad6887087ea1/raw/c008127260bc4dcd550fcd98285048cf6176f602/main.js
+feature_0003 = type=http-response,pattern=(?:(?:^https?:\/\/www\.v2ex\.com\/member\/\w+$)|(?:^https?:\/\/www\.v2ex\.com\/mission\/daily))|(?:^https?:\/\/www\.v2ex\.com\/t\/\d+),requires-body=true,max-size=0,script-path=https://raw.githubusercontent.com/zirawell/R-Store/main/Res/Scripts/Plugins/V2er_Repair.js
+feature_0004 = type=http-response,requires-body=true,pattern=^https?:\/\/api\.m\.jd\.com\/client\.action\?functionId=(wareBusiness|serverConfig|basicConfig),script-path=https://raw.githubusercontent.com/deezertidal/private/main/jdprice.js
+feature_0005 = type=http-request,pattern=^https?://ios\.prod\.ftl\.netflix\.com/iosui/user/.+path=%5B%22videos%22%2C%\d+%22%2C%22summary%22%5D,script-path=https://raw.githubusercontent.com/yichahucha/surge/master/nf_rating.js, requires-body=true, timeout=10
+feature_0006 = type=http-response,pattern=^https?://ios\.prod\.ftl\.netflix\.com/iosui/user/.+path=%5B%22videos%22%2C%\d+%22%2C%22summary%22%5D,script-path=https://raw.githubusercontent.com/yichahucha/surge/master/nf_rating.js, requires-body=true, timeout=10
+feature_0007 = type=http-response,pattern=^https?://ios\.prod\.ftl\.netflix\.com/iosui/warmer/.+type=show-ath,script-path=https://raw.githubusercontent.com/yichahucha/surge/master/nf_rating_season.js, requires-body=true, timeout=10
+feature_0008 = type=http-response,pattern=https:\/\/.+nflxvideo.net\/\?o=\d+&v=\d+&e=.+,requires-body=true,max-size=0,timeout=30,script-path=https://raw.githubusercontent.com/Neurogram-R/Surge/master/Dualsub.js
+feature_0009 = type=http-request,pattern=https:\/\/setting.nflxvideo.net\/\?action=(g|s)et,requires-body=true,max-size=0,script-path=https://raw.githubusercontent.com/Neurogram-R/Surge/master/Dualsub.js
+feature_0010 = type=http-response,pattern=^https:\/\/guide-acs\.m\.taobao\.com\/gw\/mtop\.film\.mtopshowapi\.getextendshowbyid,requires-body=true,script-path=https://raw.githubusercontent.com/98kevinxiao/javascript/main/taopiaopiao.js
+feature_0011 = type=http-request,pattern=(?:^https?:\/\/api\.weibo\.cn\/2\/remind\/unread_count\?)|(?:^https?:\/\/api\.weibo\.cn\/2\/statuses\/user_timeline\?),requires-body=false,max-size=0,script-path=https://raw.githubusercontent.com/zirawell/R-Store/main/Res/Scripts/Plugins/VVebo_Repair.js
+feature_0012 = type=http-response,pattern=(?:^https?:\/\/api\.weibo\.cn\/2\/profile\/statuses\/tab\?)|(?:^https?:\/\/api\.weibo\.cn\/2\/cardlist\?),requires-body=true,max-size=0,script-path=https://raw.githubusercontent.com/zirawell/R-Store/main/Res/Scripts/Plugins/VVebo_Repair.js
+feature_0013 = type=cron,script-path=https://raw.githubusercontent.com/deezertidal/private/main/rumors.js,cronexp="17 17 17 * *",wake-system=1,enable=false
+feature_0014 = type=cron,script-path=https://raw.githubusercontent.com/deezertidal/private/main/hotoday.js,cronexp="16 16 16 ? * *",wake-system=1,argument=platform=&count=,enable=false
+feature_0015 = type=cron,script-path=https://raw.githubusercontent.com/deezertidal/private/main/appsdoor.js,cronexp="17 17 17 ? * *",wake-system=1,enable=false
+feature_0016 = type=cron,script-path=https://raw.githubusercontent.com/deezertidal/private/main/tv.js,cronexp="11 11 11 * * ?",wake-system=1,enable=false
+feature_0017 = type=cron,script-path=https://raw.githubusercontent.com/deezertidal/private/main/qm.js,cronexp="15 15 15 ? * *",wake-system=1,argument="",enable=false
+feature_0018 = type=cron,script-path=https://raw.githubusercontent.com/deezertidal/private/main/nm.js,cronexp="19 19 19 ? * *",wake-system=1,enable=false
+feature_0019 = type=cron,script-path=https://raw.githubusercontent.com/deezertidal/private/main/km.js,cronexp="20 20 20 ? * *",wake-system=1,enable=false
+feature_0020 = type=cron,script-path=https://raw.githubusercontent.com/deezertidal/private/main/bb100.js,cronexp="0 0 12 ? * WED",wake-system=1,argument=songCount=&sort=,enable=false
+feature_0021 = type=cron,script-path=https://raw.githubusercontent.com/deezertidal/shadowrocket-rules/main/js/tianqi.js,cronexp="0 0 6-21/5 ? * *",wake-system=1,timeout=10,script-update-interval=0,enable=false
+feature_0022 = type=cron,script-path=https://raw.githubusercontent.com/deezertidal/private/main/rates.js,cronexp="8 8 8 ? * *",wake-system=1,timeout=10,script-update-interval=0,enable=false
+feature_0023 = type=cron,script-path=https://raw.githubusercontent.com/deezertidal/private/main/crypto.js,cronexp="10 10 10 ? * *",wake-system=1,timeout=10,script-update-interval=0,enable=false
+feature_0024 = type=cron,script-path=https://raw.githubusercontent.com/deezertidal/private/main/book.js, cronexp="0 0 10 1/3 * ?" ,wake-system=1,timeout=10,enable=false
+feature_0025 = type=cron,script-path=https://raw.githubusercontent.com/deezertidal/private/main/histoday.js,cronexp="10 10 10 * * ?",wake-system=1,timeout=10,script-update-interval=0,enable=false
+feature_0026 = type=cron,script-path=https://raw.githubusercontent.com/deezertidal/private/main/lifeindex.js,cronexp="6 6 6 ? * *",wake-system=1,timeout=10,script-update-interval=0,enable=false
+feature_0027 = type=cron,script-path=https://raw.githubusercontent.com/deezertidal/private/main/oil.js,cronexp="9 9 9 * * ?",wake-system=1,timeout=10,script-update-interval=0,enable=false,argument=
+
+
+# 扫描全能王：上游响应改写，未作设备实测
+member_camscanner = type=http-response, pattern=https:\/\/(api|api-cs)\.intsig\.net\/purchase\/cs\/query_property\?, requires-body=true, script-path=https://raw.githubusercontent.com/NobyDa/Script/master/Surge/JS/CamScanner.js, timeout=15
+# lightroom：上游响应改写，未作设备实测
+member_lightroom = type=http-response, pattern=^https:\/\/photos\.adobe\.io\/v2\/accounts(?:\/|\?|$), requires-body=true, script-path=https://raw.githubusercontent.com/litieyin/AD_VIP/main/Script/lightroom.js, timeout=15
+# 美篇：上游响应改写，未作设备实测
+member_meipian = type=http-response, pattern=^https:\/\/poster\.meipian\.cn\/5\.3\/user\/info(?:\?|$), requires-body=true, script-path=https://raw.githubusercontent.com/litieyin/AD_VIP/main/Script/meipian.js, timeout=15
+# myfitnesspal：上游响应改写，未作设备实测
+member_myfitnesspal = type=http-response, pattern=^https:\/\/premium-api\.myfitnesspal\.com\/v3\/subscriptions\/MFP(?:\/|\?|$), requires-body=true, script-path=https://raw.githubusercontent.com/Marol62926/MarScrpt/main/myFitnessPal.js, timeout=15
+# notability：上游响应改写，未作设备实测
+member_notability = type=http-response, pattern=^https://notability.com/subscriptions, requires-body=true, script-path=https://raw.githubusercontent.com/litieyin/AD_VIP/main/Script/notability.js, timeout=15
+# 奶由壁纸：上游响应改写，未作设备实测
+member_nybz = type=http-response, pattern=https://nz-api.duitang.com/account/me, requires-body=true, script-path=https://raw.githubusercontent.com/Marol62926/MarScrpt/main/naiyou.js, timeout=15
+# photoshop Express：上游响应改写，未作设备实测
+member_photoshop = type=http-response, pattern=^https:\/\/lcs-mobile-cops\.adobe\.io\/mobile_profile, requires-body=true, script-path=https://raw.githubusercontent.com/litieyin/AD_VIP/main/Script/photoshop.js, timeout=15
+# picsart：上游响应改写，未作设备实测
+member_picsart = type=http-response, pattern=^https:\/\/api\.(?:picsart|meiease)\.(?:cn|com)\/users\/show\/me\.json(?:\?|$), requires-body=true, script-path=https://raw.githubusercontent.com/NobyDa/Script/master/Surge/JS/PicsArt.js, timeout=15
+# wallcraft：上游响应改写，未作设备实测
+member_wallcraft = type=http-response, pattern=^https?:\/\/billing-ios\.wallpaperscraft\.com\/verify_receipt\/remove_ads$, requires-body=true, script-path=https://raw.githubusercontent.com/yqc007/QuantumultX/master/WallCraftFProCrack.js, timeout=15
+# 网易蜗牛读书：上游响应改写，未作设备实测
+member_wnds = type=http-response, pattern=^https?:\/\/p\.du\.163\.com\/gain\/readtime\/info\.json, requires-body=true, script-path=https://raw.githubusercontent.com/deezertidal/private/main/wnds.js, timeout=15
+# WPS：上游响应改写，未作设备实测
+member_WPS = type=http-response, pattern=^https?:\/\/(?:[A-Za-z0-9-]+\.)?account\.wps\.(?:com|cn)(?::\d+)?\/api\/users\/\w+\/overview(?:\?|$), requires-body=true, script-path=https://raw.githubusercontent.com/I-am-R-E/Functional-Store-Hub/Master/WPSOffice/Script/WPS.js, timeout=15
+# xmind思维导图：上游响应改写，未作设备实测
+member_xmind = type=http-response, pattern=https?:\/\/www\.xmind\.(cn|net|app)\/\_res\/devices, requires-body=true, script-path=https://raw.githubusercontent.com/I-am-R-E/Functional-Store-Hub/Master/Xmind/Script/Xmind.js, timeout=15
+# 有道云笔记：上游响应改写，未作设备实测
+member_ydybj = type=http-response, pattern=^https:\/\/note\.youdao\.com\/yws\/(?:mapi\/payment|api\/self)(?:\?|$), requires-body=true, script-path=https://raw.githubusercontent.com/Alex0510/Eric/master/surge/Script/ydybj.js, timeout=15
+# 微信读书免费卡解锁：仅旧版 6.0.1/5.4.3，源码混淆，按用户要求启用
+member_wxds = type=http-response, pattern=^https:\/\/i\.weread\.qq\.com\/pay\/memberCardSummary, requires-body=true, script-path=https://raw.githubusercontent.com/89996462/Quantumult-X/main/ycdz/txwxds.js, timeout=15, enable=true
+# RevenueCat 多 App：仅保留一个按 User-Agent 分派的合集；匹配表不是实测可用名单。
+member_revenuecat_request = type=http-request, pattern=^https?:\/\/api\.(?:revenuecat|rc-backup)\.com\/v1\/(?:subscribers\/[^\/]+$|receipts$), requires-body=false, script-path=https://raw.githubusercontent.com/Guding88/Script/main/APPheji_Revenuecat.js, timeout=15
+member_revenuecat_response = type=http-response, pattern=^https?:\/\/api\.(?:revenuecat|rc-backup)\.com\/v1\/(?:subscribers\/[^\/]+$|receipts$), requires-body=true, script-path=https://raw.githubusercontent.com/Guding88/Script/main/APPheji_Revenuecat.js, timeout=15
+member_spotify_request = type=http-request,pattern=^https:\/\/(spclient\.wg\.spotify\.com|.*-spclient\.spotify\.com(:443)?)\/(artistview\/v1\/artist|album-entity-view\/v2\/album)\/,requires-body=0,script-path=https://raw.githubusercontent.com/app2smile/rules/master/js/spotify-json.js
+member_spotify_response = type=http-response,pattern=^https:\/\/(spclient\.wg\.spotify\.com|.*-spclient\.spotify\.com(:443)?)\/(bootstrap\/v1\/bootstrap|user-customization-service\/v1\/customize)$,requires-body=1,binary-body-mode=1,max-size=0,script-path=https://raw.githubusercontent.com/app2smile/rules/master/js/spotify-proto.js,script-update-interval=0
+
+[MITM]
+hostname = %APPEND% *.account.wps.cn, *.account.wps.com, *.githubusercontent.com, *.nflxvideo.net, *spclient.spotify.com, abbyychina.com, account.wps.cn, account.wps.com, aicoin.cn, alienskins.cn, anydeskchina.cn, api-cs.intsig.net, api.intsig.net, api.m.jd.com, api.meiease.cn, api.meiease.com, api.picsart.cn, api.picsart.com, api.rc-backup.com, api.revenuecat.com, api.weibo.cn, app.mieco.net, bartender.cc, betterzip.com, betterzip.net, betterzipcn.com, betterzipcn.net, beyondcompare.cc, billing-ios.wallpaperscraft.com, bingdianhuanyuan.cn, chemdraw.com.cn, cn.ultraiso.net, codesoftchina.com, coreldrawchina.com, crossoverchina.com, ditu.google.cn, dongmansoft.com, duckduckgo.com, earmasterchina.cn, easyrecoverychina.com, ediuschina.com, firefox.com.cn, flstudiochina.com, folxchina.cn, formysql.com, g.cn, google.cn, gql-fed.reddit.com, gql.reddit.com, guide-acs.m.taobao.com, guitarpro.cc, huishenghuiying.com.cn, hypeapp.cn, hypersnap.mairuan.com, i.weread.qq.com, iconworkshop.cn, idmchina.net, ign.xn--fiqs8s, imazingchina.com, imindmap.cc, ios.prod.ftl.netflix.com, jd.com, jihehuaban.com.cn, kingdeecn.cn, lcs-mobile-cops.adobe.io, link.zhihu.com, links.jianshu.com, logoshejishi.com, logoshejishi.mairuan.com, luping.net.cn, maps.google.cn, mathtype.cn, mi.com, mindmanager.cc, mindmanager.cn, mindmapper.cc, mycleanmymac.com, nicelabel.cc, notability.com, note.youdao.com, ntfsformac.cn, nz-api.duitang.com, officesoftcn.com, oia.zhihu.com, overturechina.com, p.du.163.com, passwordrecovery.cn, pdfexpert.cc, photos.adobe.io, photozoomchina.com, poster.meipian.cn, premium-api.myfitnesspal.com, ptf.flyertrip.com, shankejingling.com, spclient.wg.spotify.com, suning.com, surge.app, t.me, taobao.com, vegaschina.cn, www.abbyychina.com, www.aicoin.cn, www.alienskins.cn, www.anydeskchina.cn, www.bartender.cc, www.betterzip.com, www.betterzip.net, www.betterzipcn.com, www.betterzipcn.net, www.beyondcompare.cc, www.bingdianhuanyuan.cn, www.chemdraw.com.cn, www.codesoftchina.com, www.coreldrawchina.com, www.crossoverchina.com, www.dongmansoft.com, www.earmasterchina.cn, www.easyrecoverychina.com, www.ediuschina.com, www.firefox.com.cn, www.flstudiochina.com, www.folxchina.cn, www.formysql.com, www.g.cn, www.google.cn, www.google.com, www.guitarpro.cc, www.huishenghuiying.com.cn, www.hypeapp.cn, www.iconworkshop.cn, www.idmchina.net, www.ign.xn--fiqs8s, www.imazingchina.com, www.imindmap.cc, www.jd.com, www.jianshu.com, www.jihehuaban.com.cn, www.kingdeecn.cn, www.logoshejishi.com, www.luping.net.cn, www.mathtype.cn, www.mi.com, www.mindmanager.cc, www.mindmanager.cn, www.mindmapper.cc, www.mycleanmymac.com, www.nicelabel.cc, www.ntfsformac.cn, www.officesoftcn.com, www.overturechina.com, www.passwordrecovery.cn, www.pdfexpert.cc, www.photozoomchina.com, www.shankejingling.com, www.suning.com, www.taobao.com, www.v2ex.com, www.vegaschina.cn, www.xitongqingli.com, www.xmind.app, www.xmind.cn, www.xmind.net, www.xshellcn.com, www.yhd.com, www.yuanchengxiezuo.com, www.zbrushcn.com, www.zhihu.com, xitongqingli.com, xshellcn.com, yfamilys.com, yhd.com, you.163.com, yuanchengxiezuo.com, zbrushcn.com, -10jqka.com.cn, -*.10jqka.com.cn, -1234567.com.cn, -*.1234567.com.cn, -95510.com, -*.95510.com, -95511.com, -*.95511.com, -95516.com, -*.95516.com, -95522.com, -*.95522.com, -95528.com, -*.95528.com, -95533.com, -*.95533.com, -95555.com, -*.95555.com, -95558.com, -*.95558.com, -95559.com.cn, -*.95559.com.cn, -95561.com, -*.95561.com, -95566.com, -*.95566.com, -95568.com, -*.95568.com, -95577.com, -*.95577.com, -95580.com, -*.95580.com, -95585.com, -*.95585.com, -95588.com, -*.95588.com, -95595.com, -*.95595.com, -95599.cn, -*.95599.cn, -abchina.com, -*.abchina.com, -abchina.com.cn, -*.abchina.com.cn, -account.apple.com, -*.account.apple.com, -accounts.google.com, -*.accounts.google.com, -alipay.com, -*.alipay.com, -alipay.com.cn, -*.alipay.com.cn, -alipayobjects.com, -*.alipayobjects.com, -api.mch.weixin.qq.com, -*.api.mch.weixin.qq.com, -appleid.apple.com, -*.appleid.apple.com, -bank.pingan.com, -*.bank.pingan.com, -bankcomm.com, -*.bankcomm.com, -bankofbeijing.com.cn, -*.bankofbeijing.com.cn, -bankofchina.com, -*.bankofchina.com, -bankofshanghai.com, -*.bankofshanghai.com, -bjrcb.com, -*.bjrcb.com, -boc.cn, -*.boc.cn, -boccreditcard.com, -*.boccreditcard.com, -boq.cn, -*.boq.cn, -bosc.cn, -*.bosc.cn, -ccb.cn, -*.ccb.cn, -ccb.com, -*.ccb.com, -ccb.com.cn, -*.ccb.com.cn, -cebbank.com, -*.cebbank.com, -cgbchina.com, -*.cgbchina.com, -chinaums.com, -*.chinaums.com, -cib.com.cn, -*.cib.com.cn, -citicbank.com, -*.citicbank.com, -citics.com, -*.citics.com, -cmb.com, -*.cmb.com, -cmbc.cn, -*.cmbc.cn, -cmbc.com.cn, -*.cmbc.com.cn, -cmbchina.cn, -*.cmbchina.cn, -cmbchina.com, -*.cmbchina.com, -cmschina.com, -*.cmschina.com, -cs.ecitic.com, -*.cs.ecitic.com, -czbank.com, -*.czbank.com, -eastmoney.com, -*.eastmoney.com, -ecitic.com, -*.ecitic.com, -gf.com.cn, -*.gf.com.cn, -gjzq.com.cn, -*.gjzq.com.cn, -gtja.com, -*.gtja.com, -haitong.com, -*.haitong.com, -hrcb.com.cn, -*.hrcb.com.cn, -htsc.com.cn, -*.htsc.com.cn, -hxb.com.cn, -*.hxb.com.cn, -hzbank.com.cn, -*.hzbank.com.cn, -icbc.com.cn, -*.icbc.com.cn, -id6.me, -*.id6.me, -idmsa.apple.com, -*.idmsa.apple.com, -jsbchina.cn, -*.jsbchina.cn, -login.weixin.qq.com, -*.login.weixin.qq.com, -nbcb.com.cn, -*.nbcb.com.cn, -njcb.com.cn, -*.njcb.com.cn, -open.e.189.cn, -*.open.e.189.cn, -open.weixin.qq.com, -*.open.weixin.qq.com, -pay.weixin.qq.com, -*.pay.weixin.qq.com, -payapp.wechatpay.cn, -*.payapp.wechatpay.cn, -payapp.weixin.qq.com, -*.payapp.weixin.qq.com, -paypal.com, -*.paypal.com, -paypalobjects.com, -*.paypalobjects.com, -pingan.com, -*.pingan.com, -psbc.com, -*.psbc.com, -ptlogin2.qq.com, -*.ptlogin2.qq.com, -qpay.qq.com, -*.qpay.qq.com, -shbank.com, -*.shbank.com, -spdb.com, -*.spdb.com, -spdb.com.cn, -*.spdb.com.cn, -srcb.com, -*.srcb.com, -ssl.ptlogin2.qq.com, -*.ssl.ptlogin2.qq.com, -tenpay.com, -*.tenpay.com, -unionpay.com, -*.unionpay.com, -unionpayintl.com, -*.unionpayintl.com, -wechatpay.cn, -*.wechatpay.cn, -xueqiu.com, -*.xueqiu.com, -zjbank.com, -*.zjbank.com, -zjtlcb.com, -*.zjtlcb.com

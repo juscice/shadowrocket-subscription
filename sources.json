@@ -1,0 +1,35 @@
+{
+  "owner": "juscice",
+  "repository": "shadowrocket-subscription",
+  "branch": "main",
+  "core_sources": [
+    {
+      "name": "ACL4SSR_BanAD.list",
+      "url": "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/BanAD.list",
+      "input_rules": 588,
+      "sha256": "27a5f6d018d428409d8da5d9f390a46298d505ae4941bb8172f052055abe7262"
+    },
+    {
+      "name": "ACL4SSR_BanProgramAD.list",
+      "url": "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/BanProgramAD.list",
+      "input_rules": 1016,
+      "sha256": "35cefd7a4c01d2efa9b4c7928e21caa348f78a3f60b46d7d850f1e3334a5a766"
+    },
+    {
+      "name": "ACL4SSR_BanEasyListChina.list",
+      "url": "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/BanEasyListChina.list",
+      "input_rules": 5050,
+      "sha256": "dcbc1a18b9723747fc26a3a922c04917b0c15378725035171a502fcf2c2653cf"
+    },
+    {
+      "name": "NobyDa domestic SDK endpoint subset",
+      "url": "https://raw.githubusercontent.com/NobyDa/Script/master/Surge/AdRule.list",
+      "input_rules": 26,
+      "selection": "only named domestic ad SDK families; supplementary legacy list, not latest primary core",
+      "header_date": "2023/12/23",
+      "sha256": "db0b0aeb1395f85bb524681825660928a5ca808bce2410cf4c8fe8ab6f332f57"
+    }
+  ],
+  "max_ad_rules": 20000,
+  "sdk_selector": "pangolin|pglstatp|sigmob|tanx|beizi|oceanengine|adash|ksad|mobads|guangdiantong|youmi|adservice"
+}
