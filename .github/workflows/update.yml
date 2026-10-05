@@ -1,0 +1,54 @@
+name: Update Shadowrocket subscription
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '17 */6 * * *'
+  push:
+    paths:
+      - 'profiles/**'
+      - 'tools/**'
+      - 'sources.json'
+      - '.github/workflows/update.yml'
+permissions:
+  contents: write
+concurrency:
+  group: subscription-update
+  cancel-in-progress: false
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Initialize uploaded subscription bundle
+        if: ${{ hashFiles('sources.json') == '' }}
+        run: |
+          python3 - <<'PYTHON'
+          from pathlib import Path
+          from zipfile import ZipFile
+          bundle = Path('shadowrocket_github_subscription.zip')
+          with ZipFile(bundle) as archive:
+              for entry in archive.infolist():
+                  path = Path(entry.filename)
+                  if path.is_absolute() or '..' in path.parts:
+                      raise ValueError('Unsafe bundle path')
+                  if path.parts[0] != '.github':
+                      archive.extract(entry)
+          bundle.unlink()
+          PYTHON
+      - name: Test updater
+        run: python3 tools/test_update.py
+      - name: Refresh and validate
+        run: python3 tools/update.py
+      - name: Commit changed subscription files
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A
+          if ! git diff --cached --quiet; then
+            git commit -m 'Update core ad rules and upstream references'
+            git push origin HEAD
+          fi
