@@ -1,4 +1,4 @@
-# Shadowrocket 国内核心广告订阅
+# Shadowrocket 去广告和功能增强订阅
 
 面向国内常用 App 的去广告与功能增强配置，提供完整配置和两个独立模块。仓库已经发布，GitHub Actions 每 6 小时检查批准的核心库和配置实际引用的远程脚本、规则集和 Map Local JSON 响应文件。
 
