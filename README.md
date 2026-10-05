@@ -1,6 +1,6 @@
 # Shadowrocket 去广告和功能增强订阅
 
-面向国内常用 App 的去广告与功能增强配置，提供完整配置和两个独立模块。仓库已经发布，GitHub Actions 每 6 小时检查批准的核心库和配置实际引用的远程脚本、规则集和 Map Local JSON 响应文件。
+面向中国大陆用户的去广告与功能增强配置，重点覆盖国内常用 App，提供完整配置和两个独立模块。仓库已经发布，GitHub Actions 每 6 小时检查批准的核心库和配置实际引用的远程脚本、规则集和 Map Local JSON 响应文件。项目说明中的时间统一采用北京时间（UTC+8）。
 
 > 新手按下面顺序操作：**导入并选中配置 → 生成自己的证书 → 安装描述文件 → 完全信任证书 → 开启 HTTPS 解密 → 重新连接并检查。**
 >
@@ -174,7 +174,7 @@ flowchart TB
 
 ### 更新范围和校验
 
-GitHub Actions 在 UTC 00:17、06:17、12:17、18:17 计划运行（日本时间09:17、15:17、21:17、03:17），也可在 Actions → Update Shadowrocket subscription → Run workflow 手动运行。
+GitHub Actions 每天按北京时间 02:17、08:17、14:17、20:17 计划运行（每 6 小时一次），也可在 Actions → Update Shadowrocket subscription → Run workflow 手动运行。
 
 1. 刷新 ACL4SSR 的广告联盟、App广告、国内网页广告三份核心库。NobyDa仅作为有限国内SDK端点补充，不整库导入。
 2. 将实际引用的远程规则集、脚本以及 Map Local JSON 响应文件复制到本仓库 `upstream/`，生成文件引用本仓库路径。上游脚本或规则字节变化会成为本仓库提交。
