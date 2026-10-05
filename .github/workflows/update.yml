@@ -23,21 +23,23 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-      - name: Initialize uploaded subscription bundle
-        if: ${{ hashFiles('sources.json') == '' }}
+      - name: Apply reviewed upload bundle if present
         run: |
           python3 - <<'PYTHON'
           from pathlib import Path
           from zipfile import ZipFile
-          bundle = Path('shadowrocket_github_subscription.zip')
-          with ZipFile(bundle) as archive:
-              for entry in archive.infolist():
-                  path = Path(entry.filename)
-                  if path.is_absolute() or '..' in path.parts:
-                      raise ValueError('Unsafe bundle path')
-                  if path.parts[0] != '.github':
-                      archive.extract(entry)
-          bundle.unlink()
+          for filename in ('shadowrocket_github_subscription.zip', 'reviewed-release-fix.zip'):
+              bundle = Path(filename)
+              if not bundle.exists():
+                  continue
+              with ZipFile(bundle) as archive:
+                  for entry in archive.infolist():
+                      path = Path(entry.filename)
+                      if not path.parts or path.is_absolute() or '..' in path.parts:
+                          raise ValueError('Unsafe bundle path')
+                      if path.parts[0] != '.github':
+                          archive.extract(entry)
+              bundle.unlink()
           PYTHON
       - name: Test updater
         run: python3 tools/test_update.py
