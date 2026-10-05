@@ -121,6 +121,7 @@ class SplashRegressionTests(unittest.TestCase):
         urls = [
             'https://g-acs.m.goofish.com/gw/mtop.taobao.idlecommerce.splash.ads/1.0/?data=x',
             'https://acs.m.goofish.com/gw/mtop.idle.ad.expose/1.0/',
+            'https://g-acs.m.goofish.com/gw/mtop.taobao.idlecommerce.splash/1.0/',
             'https://acs.m.taobao.com/gw/mtop.fliggy.crm.screen.availablesplashstrategies/1.0/',
             'https://mapi.dianping.com/mapi/operating/loadsplashconfig?cityId=2',
             'https://m.ctrip.com/restapi/soa2/13916/scjson/tripAds?os=ios',
@@ -147,7 +148,7 @@ class SplashRegressionTests(unittest.TestCase):
         ]
         for name in ('full.conf','adblock.sgmodule'):
             sections=u.read_sections((u.ROOT/'profiles'/name).read_text())
-            patches=u.active(sections['[Map Local]'])[:4]
+            patches=[r for r in u.active(sections['[Map Local]']) if any(x in r for x in ('[^/?]*splash', 'availablesplashstrategies', 'loadsplashconfig', '[^?]*'))]
             for url in business:
                 self.assertFalse(any(re.search(r.split()[0],url) for r in patches),(name,url))
             material='https://qxb-minicode-pic-osscache.qixin.com/web/test.jpg'
