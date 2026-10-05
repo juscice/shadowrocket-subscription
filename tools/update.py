@@ -42,7 +42,51 @@ def attr(line, key):
     m = re.search(r'\b' + re.escape(key) + r'\s*=\s*(.*?)(?=,\s*[a-z-]+\s*=|$)', line)
     return m[1].strip() if m else None
 
-def fetch(url, target, offline=False, script=False):
+def validate_remote_content(text, kind):
+    if kind == 'json':
+        json.loads(text)
+    elif kind in {'rules', 'domains'}:
+        lines = active(text.splitlines())
+        if not lines:
+            raise ValueError('empty rule set')
+        allowed = {'DOMAIN', 'DOMAIN-SUFFIX', 'DOMAIN-KEYWORD', 'DOMAIN-WILDCARD',
+                   'IP-CIDR', 'IP-CIDR6', 'IP-ASN', 'USER-AGENT', 'URL-REGEX',
+                   'GEOIP', 'AND', 'OR', 'NOT', 'DEST-PORT', 'SRC-PORT', 'PROTOCOL'}
+        for line in lines:
+            fields = [f.strip() for f in line.split(',')]
+            if kind == 'domains':
+                if ',' in line or not re.fullmatch(r'[+.\-*a-zA-Z0-9_:]+', line):
+                    raise ValueError('invalid domain set entry')
+            elif len(fields) < 2 or fields[0] not in allowed or not fields[1]:
+                raise ValueError('invalid rule set entry')
+            elif fields[0] in {'IP-CIDR', 'IP-CIDR6'}:
+                ipaddress.ip_network(fields[1], strict=False)
+
+
+def remote_references(text):
+    refs = {}
+    for line in text.splitlines():
+        if not line.strip() or line.lstrip().startswith(('#', '//')):
+            continue
+        url = attr(line, 'script-path')
+        if url and url.startswith('https://'):
+            refs[url] = ('scripts/' + hashlib.sha256(url.encode()).hexdigest()[:20] + '.js', 'script')
+        if line.startswith(('RULE-SET,', 'DOMAIN-SET,')):
+            fields = line.split(','); url = fields[1].strip()
+            if url.startswith('https://'):
+                refs[url] = ('rules/' + hashlib.sha256(url.encode()).hexdigest()[:20] + '.list',
+                             'domains' if fields[0] == 'DOMAIN-SET' else 'rules')
+        # Map Local uses space-delimited attributes, rather than script commas.
+        match = re.search(r'\bdata-type\s*=\s*file\b.*?\bdata\s*=\s*"?(https://[^"\s]+)', line)
+        if match:
+            url = match[1]
+            if not url.split('?', 1)[0].endswith('.json'):
+                raise ValueError('unreviewed remote mock format: ' + url)
+            refs[url] = ('resources/' + hashlib.sha256(url.encode()).hexdigest()[:20] + '.json', 'json')
+    return refs
+
+
+def fetch(url, target, offline=False, script=False, content_kind=None):
     try:
         if not offline:
             req = urllib.request.Request(url, headers={'User-Agent': 'Shadowrocket-subscription-updater/1.0'})
@@ -51,6 +95,7 @@ def fetch(url, target, offline=False, script=False):
             if len(body) > 2 * 1024 * 1024 or not body.strip(): raise ValueError('empty or oversized source')
             text = body.decode('utf-8-sig')
             if re.match(r'\s*(<!doctype|<html)', text, re.I): raise ValueError('HTML instead of rule/script')
+            if content_kind: validate_remote_content(text, content_kind)
             if script:
                 tmp = target.with_suffix('.candidate.js'); tmp.parent.mkdir(parents=True, exist_ok=True); tmp.write_text(text)
                 check = subprocess.run(['node', '--check', str(tmp)], capture_output=True, text=True, timeout=15)
@@ -58,9 +103,14 @@ def fetch(url, target, offline=False, script=False):
                 if check.returncode: raise ValueError('JavaScript syntax check failed')
             target.parent.mkdir(parents=True, exist_ok=True); target.write_text(text)
         if not target.exists(): raise ValueError('no successful cached version')
+        if content_kind: validate_remote_content(target.read_text(), content_kind)
         return {'url': url, 'status': 'cached' if offline else 'ok', 'sha256': hashlib.sha256(target.read_bytes()).hexdigest()}
     except Exception as exc:
-        return {'url': url, 'status': 'fallback' if target.exists() else 'unavailable', 'error': str(exc)}
+        valid_cache = target.exists()
+        if valid_cache and content_kind:
+            try: validate_remote_content(target.read_text(), content_kind)
+            except Exception: valid_cache = False
+        return {'url': url, 'status': 'fallback' if valid_cache else 'unavailable', 'error': str(exc)}
 
 def core_source_rules(text, source):
     lines = active(text.splitlines())
@@ -75,11 +125,16 @@ def optimize(rules, full):
     line = next(l for l in mitm if l.startswith('hostname'))
     protected = {h.strip()[1:] for h in line.split('=', 1)[1].split(',') if h.strip().startswith('-') and not h.strip().startswith('-*.')}
     shared = {'bytedance.com','byteimg.com','pstatp.com','snssdk.com','qq.com','weixin.qq.com','taobao.com','tmall.com','alicdn.com','jd.com','360buyimg.com','pinduoduo.com','yangkeduo.com','douyin.com','amemv.com','xiaohongshu.com','xhscdn.com','bilibili.com','biliapi.net','amap.com','suning.com','meituan.com','dianping.com','ele.me','baidu.com','163.com'}
+    # These are normal app APIs or shared infrastructure, not dedicated ad endpoints.
+    shared.update({'api.biliapi.com', 'app.biliapi.com', 'api.biliapi.net', 'app.biliapi.net',
+                   'firebaseinstallations.googleapis.com', 'firebaseremoteconfig.googleapis.com',
+                   'docer.com', 'iciba.com', 'rumble.com'})
     initial = []; seen = set()
     for l in rules:
         if l in seen: continue
         seen.add(l); f = l.split(','); t = f[0]
         if t in {'DEST-PORT', 'USER-AGENT'}: continue
+        if 'DOMAIN-KEYWORD,volc)' in l: continue
         if t in {'DOMAIN', 'DOMAIN-SUFFIX'}:
             d = f[1]
             if d in shared or any(d == p or d.endswith('.' + p) or (t == 'DOMAIN-SUFFIX' and p.endswith('.' + d)) for p in protected): continue
@@ -108,7 +163,49 @@ def optimize(rules, full):
     if not 100 <= len(kept) <= CONF['max_ad_rules']: raise ValueError('core rule count guard failed')
     return kept
 
+def validate_public_contract(full, ad, feature):
+    builtins = {'DIRECT', 'REJECT', 'REJECT-DROP', 'REJECT-TINYGIF', 'PROXY'}
+    sections = read_sections(full)
+    groups = {}
+    for row in active(sections['[Proxy Group]']):
+        name, value = row.split('=', 1)
+        if name.strip() in groups: raise ValueError('duplicate proxy group')
+        fields = [f.strip() for f in value.split(',')]
+        dependencies = []
+        for value in fields[1:]:
+            if '=' in value: break
+            if value: dependencies.append(value)
+        groups[name.strip()] = dependencies
+    for name, dependencies in groups.items():
+        for dependency in dependencies:
+            if dependency not in groups and dependency not in builtins:
+                raise ValueError('undefined group dependency: ' + dependency)
+    def visit(name, stack):
+        if name in stack: raise ValueError('proxy group cycle')
+        for dependency in groups[name]:
+            if dependency in groups: visit(dependency, stack | {name})
+    for name in groups: visit(name, set())
+    for text, allowed in ((full, builtins | set(groups)), (ad, builtins), (feature, builtins)):
+        parts = read_sections(text)
+        rules = active(parts.get('[Rule]', []))
+        for row in rules:
+            fields = [f.strip() for f in row.split(',')]
+            policy = fields[-2] if fields[-1] == 'no-resolve' else fields[-1]
+            if policy not in allowed: raise ValueError('undefined routing policy: ' + policy)
+        for row in active(parts.get('[Script]', [])):
+            if attr(row, 'type') not in {'http-request', 'http-response', 'cron'}:
+                raise ValueError('unsupported script type')
+            if not attr(row, 'script-path'): raise ValueError('missing script path')
+        for row in active(parts.get('[MITM]', [])):
+            if row.split('=', 1)[0].strip() in {'ca-p12', 'ca-passphrase'} and row.split('=', 1)[1].strip():
+                raise ValueError('private certificate in public configuration')
+    rules = active(sections['[Rule]'])
+    if not rules[-1].startswith('FINAL,') or sum(r.startswith('FINAL,') for r in rules) != 1:
+        raise ValueError('missing or misplaced final policy')
+
+
 def validate(full, ad, feature):
+    validate_public_contract(full, ad, feature)
     adrules = active(read_sections(ad)['[Rule]'])
     if len(adrules) != len(set(adrules)): raise ValueError('duplicate ad rules')
     if not set(adrules) <= set(active(read_sections(full)['[Rule]'])): raise ValueError('full/module ad mismatch')
@@ -117,7 +214,7 @@ def validate(full, ad, feature):
         if 'enable=true' not in row: raise ValueError('WeRead must stay enabled')
         rows = active(read_sections(text)['[Script]']); names = [l.split('=',1)[0].strip() for l in rows]
         if len(names) != len(set(names)): raise ValueError('duplicate script names')
-    safe = ['www.bytedance.com','m.suning.com','i.weread.qq.com','api.revenuecat.com','mp.weixin.qq.com','api.m.jd.com','edith.xiaohongshu.com','api.bilibili.com','account.wps.cn','pay.weixin.qq.com']
+    safe = ['www.bytedance.com','m.suning.com','i.weread.qq.com','api.revenuecat.com','mp.weixin.qq.com','api.m.jd.com','edith.xiaohongshu.com','api.bilibili.com','account.wps.cn','pay.weixin.qq.com','api.biliapi.net','app.biliapi.net','api.biliapi.com','app.biliapi.com','firebaseinstallations.googleapis.com','firebaseremoteconfig.googleapis.com','www.iciba.com','www.docer.com','rumble.com']
     for h in safe:
         for l in adrules:
             f=l.split(',');t=f[0]
@@ -158,22 +255,20 @@ def main():
     raw='https://raw.githubusercontent.com/'+repository+'/'+CONF['branch']+'/'
     refs={}
     for text in (full,ad,feature):
-        for l in text.splitlines():
-            u=attr(l,'script-path')
-            if u and u.startswith('https://'):
-                refs[u]='scripts/'+hashlib.sha256(u.encode()).hexdigest()[:20]+'.js'
-            if l.startswith(('RULE-SET,','DOMAIN-SET,')):
-                f=l.split(',');u=f[1].strip()
-                if u.startswith('https://'):refs[u]='rules/'+hashlib.sha256(u.encode()).hexdigest()[:20]+'.list'
+        refs.update(remote_references(text))
     # Copy template references into our repository so upstream refresh produces real content commits.
     def job(item):
-        u,rel=item;r=fetch(u,CACHE/rel,args.offline,rel.startswith('scripts/'));r['path']='upstream/'+rel
-        if not rel.startswith('scripts/') and (CACHE/rel).exists():
-            content=(CACHE/rel).read_text()
-            if not active(content.splitlines()):raise ValueError('empty rule set '+u)
-        return r
-    with concurrent.futures.ThreadPoolExecutor(max_workers=12) as pool:results+=list(pool.map(job,sorted(refs.items())))
-    replacements={u:raw+'upstream/'+rel for u,rel in refs.items() if (CACHE/rel).exists()}
+        url, (rel, kind) = item
+        result = fetch(url, CACHE/rel, args.offline, kind == 'script',
+                       None if kind == 'script' else kind)
+        result['path'] = 'upstream/' + rel
+        # An uncached required dependency cannot produce a public working release.
+        if result['status'] == 'unavailable':
+            raise ValueError('required dependency unavailable: ' + url)
+        return result
+    with concurrent.futures.ThreadPoolExecutor(max_workers=12) as pool:
+        results += list(pool.map(job, sorted(refs.items())))
+    replacements = {url:raw+'upstream/'+rel for url,(rel,kind) in refs.items()}
     for u,new in sorted(replacements.items(),key=lambda t:len(t[0]),reverse=True):
         full=full.replace(u,new);ad=ad.replace(u,new);feature=feature.replace(u,new)
     full=full.replace('# 合并日期：2026-10-05；规则固定快照，远程脚本继续依赖各上游。','# 本文件由GitHub Actions自动构建；核心规则和已缓存引用按计划更新。')

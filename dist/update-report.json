@@ -1,6 +1,6 @@
 {
   "repository": "juscice/shadowrocket-subscription",
-  "ad_rules": 6887,
+  "ad_rules": 6879,
   "references": [
     {
       "url": "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/BanAD.list",
@@ -87,6 +87,12 @@
       "status": "ok",
       "sha256": "efa97fe95f5c2a4b8b59eeb2d47313feb16f70f43e45ed7858209db8b9a79cfc",
       "path": "upstream/scripts/002dd074d1ce16b3f749.js"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/Keywos/rule/main/mocks/caiyun.json",
+      "status": "ok",
+      "sha256": "4db327264945d64ea37b50115e1af9563f17cd81048732a2525b0c5953f2bb97",
+      "path": "upstream/resources/4c4c1af80d7533b7a9c5.json"
     },
     {
       "url": "https://raw.githubusercontent.com/Keywos/rule/main/script/wy/js/wyres.js",
@@ -909,6 +915,30 @@
       "status": "ok",
       "sha256": "79098ac4d2eb7932c9b2b45ac7891469703626855e5d13ab4374af52cc48983e",
       "path": "upstream/scripts/6d1ee8efe017b7c03876.js"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/zirawell/R-Store/main/Res/Data/iyunmai.json",
+      "status": "ok",
+      "sha256": "3ef13373bb1a2cc914f2d88e2734e3f194ecb7dc31f0e3c0d029e0499ce55918",
+      "path": "upstream/resources/f3bd3889d261cbc2a23a.json"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/zirawell/R-Store/main/Res/Data/mt_aggregate.json",
+      "status": "ok",
+      "sha256": "02a6ca02046356740be8975f3e70a57d5f82edf00e11a1926dbf50a86ef85218",
+      "path": "upstream/resources/c15e36fefb0ee436e843.json"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/zirawell/R-Store/main/Res/Data/qi.json",
+      "status": "ok",
+      "sha256": "4cecfa511dd11c08e511eb9b9824947a774c7c4e100ed9149f32c813f7bd350f",
+      "path": "upstream/resources/1f5e62d172ad05e146ee.json"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/zirawell/R-Store/main/Res/Data/u51.json",
+      "status": "ok",
+      "sha256": "f8a6be40e42cf69b0e884968f1fbe849c76189834e2bc626c043efbf7e007d6a",
+      "path": "upstream/resources/15295381fe83fef6da2e.json"
     },
     {
       "url": "https://raw.githubusercontent.com/zirawell/R-Store/main/Res/Scripts/AntiAd/163music.js",
