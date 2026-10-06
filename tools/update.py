@@ -24,6 +24,49 @@ def replace_section(text, section, content):
     if end < 0: end = len(text)
     return text[:start] + content.rstrip() + '\n' + text[end:]
 
+def deduplicate_url_sections(text):
+    """Resolve HTTP(S) overlap while preserving actions and exception order."""
+    counts = {'removed': 0, 'protocol_overlap_resolved': 0}
+    for section in ('[URL Rewrite]', '[Map Local]', '[Body Rewrite]'):
+        rows = read_sections(text).get(section)
+        if rows is None: continue
+        groups = {}
+        for i, row in enumerate(rows):
+            if not row.strip() or row.lstrip().startswith(('#', '//')): continue
+            fields = row.strip().split(None, 2 if section == '[Body Rewrite]' else 1)
+            pos = 1 if section == '[Body Rewrite]' else 0
+            if len(fields) <= pos + 1: continue
+            pattern = fields[pos].replace('\\/', '/')
+            if not pattern.startswith(('^https://', '^https?://')): continue
+            key = tuple(fields[:pos] + [pattern.replace('^https://', '^https?://', 1)] + fields[pos+1:])
+            groups.setdefault(key, []).append((i, fields, pos, pattern))
+        removed = set()
+        for group in groups.values():
+            broad = [entry for entry in group if entry[3].startswith('^https?://')]
+            narrow = [entry for entry in group if entry[3].startswith('^https://')]
+            if not broad or not narrow or len(group) != 2: continue
+            b, n = broad[0], narrow[0]
+            if section == '[Body Rewrite]' and b[0] < n[0]: continue
+            safe = section != '[Body Rewrite]' and b[0] < n[0]
+            if section == '[URL Rewrite]' and n[0] < b[0]:
+                action = n[1][-1]
+                between = active(rows[n[0]+1:b[0]])
+                # An HTTP-only redirect cannot intercept the earlier HTTPS match.
+                safe = all(r.split(None, 1)[-1] == action or
+                           r.replace('\\/', '/').startswith(('^http://', '^(http://'))
+                           for r in between)
+            if safe:
+                removed.add(n[0]); counts['removed'] += 1
+            else:
+                # Keep both positions when moving a rule could change priority.
+                # Partition HTTPS (earlier) and HTTP (later) instead.
+                fields = b[1][:]
+                fields[b[2]] = fields[b[2]].replace('https?', 'http', 1)
+                rows[b[0]] = ' '.join(fields)
+                counts['protocol_overlap_resolved'] += 1
+        text = replace_section(text, section, '\n'.join(row for i, row in enumerate(rows) if i not in removed))
+    return text, counts
+
 def canonical_rule(line):
     f = [x.strip() for x in line.split(',')]
     if f[0] not in {'DOMAIN', 'DOMAIN-SUFFIX', 'DOMAIN-KEYWORD', 'IP-CIDR', 'IP-CIDR6'}:
@@ -372,6 +415,9 @@ def main():
             hosts = [h.strip() for h in row.split('=', 1)[1].split(',')]
             mitm[i] = 'hostname = '+','.join(dict.fromkeys(hosts+sorted(exclusions)))
     full = replace_section(full, '[MITM]', '\n'.join(mitm))
+    full, _ = deduplicate_url_sections(full)
+    ad, _ = deduplicate_url_sections(ad)
+    feature, _ = deduplicate_url_sections(feature)
     n=validate(full,ad,feature)
     dist=ROOT/'dist';dist.mkdir(exist_ok=True)
     for name,text in [('shadowrocket.conf',full),('adblock.sgmodule',ad),('enhance.sgmodule',feature)]:

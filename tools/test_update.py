@@ -156,4 +156,32 @@ class SplashRegressionTests(unittest.TestCase):
             self.assertIsNotNone(re.search(rewrite.split()[0],material))
             self.assertIn('qxb-minicode-pic-osscache.qixin.com', ''.join(sections['[MITM]']))
 
+class DedupRegressionTests(unittest.TestCase):
+    def test_reject_pair_keeps_both_protocols(self):
+        original='[URL Rewrite]\n^https://ads.example/a - reject\n^https?://ads.example/a - reject\n'
+        result, count=u.deduplicate_url_sections(original)
+        rows=u.active(u.read_sections(result)['[URL Rewrite]'])
+        self.assertEqual(len(rows),1)
+        self.assertEqual(count['removed'],1)
+        for url in ('http://ads.example/a','https://ads.example/a'):
+            self.assertTrue(re.search(rows[0].split()[0],url))
+        self.assertEqual(u.deduplicate_url_sections(result)[0],result)
+    def test_conflicting_map_exception_keeps_original_priority(self):
+        original='[Map Local]\n^https://api.example/ads data-type=text data="{}"\n^https?://api.example/ads/special data-type=tiny-gif\n^https?://api.example/ads data-type=text data="{}"\n'
+        result,count=u.deduplicate_url_sections(original)
+        def first(text,url):
+            return next(r.split(None,1)[1] for r in u.active(u.read_sections(text)['[Map Local]']) if re.search(r.split()[0],url))
+        for url in ('http://api.example/ads','https://api.example/ads','http://api.example/ads/special','https://api.example/ads/special'):
+            self.assertEqual(first(original,url),first(result,url))
+        self.assertEqual(count['protocol_overlap_resolved'],1)
+        self.assertEqual(u.deduplicate_url_sections(result)[0],result)
+    def test_distinct_actions_and_body_order_are_preserved(self):
+        text='[URL Rewrite]\n^https://api.example/a - reject\n^https?://api.example/a - reject-drop\n[Body Rewrite]\nhttp-response ^https://api.example/a old new\nhttp-response ^https?://api.example/a new final\nhttp-response ^https?://api.example/a old new\n'
+        result,count=u.deduplicate_url_sections(text)
+        self.assertEqual(u.active(u.read_sections(result)['[URL Rewrite]']),u.active(u.read_sections(text)['[URL Rewrite]']))
+        rows=u.active(u.read_sections(result)['[Body Rewrite]'])
+        self.assertEqual(rows[1],'http-response ^https?://api.example/a new final')
+        self.assertEqual(rows[2],'http-response ^http://api.example/a old new')
+        self.assertEqual(count['removed'],0)
+
 if __name__=='__main__':unittest.main()
