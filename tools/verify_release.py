@@ -34,11 +34,31 @@ expected={'dns.weixin.qq.com':'DIRECT','dns.weixin.qq.com.cn':'DIRECT','api.open
 for host,want in expected.items():
     got=policy(host)
     if got!=want:raise ValueError(f'routing regression {host}: {got} != {want}')
+for host in u.CONF.get('bank_exact_hosts', []):
+    if policy(host) != 'DIRECT':raise ValueError('bank app host is not direct: '+host)
+for host in ('hcz.pingan.com','hcz-static.pingan.com.cn'):
+    if policy(host) != 'DIRECT':raise ValueError('Ping An car owner host is not direct: '+host)
+    for text in (full,ad,enhance):
+        exclusions=u.financial_exclusions(text)
+        if not any(host==r[1:] or host.endswith('.'+r[1:]) for r in exclusions if not r.startswith('-*.')):
+            raise ValueError('Ping An car owner host may be decrypted: '+host)
+for text in (full,ad,enhance):
+    required=u.financial_exclusions(full)
+    if not required <= u.financial_exclusions(text):raise ValueError('module missing financial exclusions')
+    if u.apply_financial_exclusions(text,required) != text:raise ValueError('contradictory financial MITM host')
+    for section,rows in u.read_sections(text).items():
+        entries=u.active(rows)
+        if len(entries)!=len(set(entries)):raise ValueError('duplicate entries in '+section)
+    if any(u.deduplicate_url_sections(text)[1].values()):raise ValueError('duplicate HTTP(S) matcher coverage')
 patterns=set()
 for text in (full,ad,enhance):
     for row in u.active(u.read_sections(text).get('[Script]',[])):
         pattern=u.attr(row,'pattern')
         if pattern:patterns.add(pattern)
+    for section in ('[URL Rewrite]','[Map Local]','[Body Rewrite]'):
+        for row in u.active(u.read_sections(text).get(section, [])):
+            fields=row.split()
+            patterns.add(fields[1] if section=='[Body Rewrite]' else fields[0])
 for pattern in patterns:
     result=subprocess.run(['rg','--pcre2','-e',pattern],input='',text=True,capture_output=True)
     if result.returncode not in (0,1):raise ValueError('invalid HTTP pattern: '+pattern+' '+result.stderr)

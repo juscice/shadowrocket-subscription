@@ -67,6 +67,31 @@ def deduplicate_url_sections(text):
         text = replace_section(text, section, '\n'.join(row for i, row in enumerate(rows) if i not in removed))
     return text, counts
 
+def financial_exclusions(text):
+    hosts = []
+    for row in read_sections(text).get('[MITM]', []):
+        if row.strip().startswith('hostname'):
+            hosts += [h.strip() for h in row.split('=', 1)[1].split(',') if h.strip().startswith('-')]
+    return set(hosts)
+
+def apply_financial_exclusions(text, exclusions):
+    """Keep exclusions on every entry point; remove contradictory positive hosts."""
+    import fnmatch
+    roots = {h[1:] for h in exclusions if not h.startswith('-*.')}
+    def blocked(host):
+        return any(host == root or host.endswith('.'+root) or
+                   ('*' in host and fnmatch.fnmatchcase(root, host)) for root in roots)
+    rows = read_sections(text)['[MITM]']
+    for i, row in enumerate(rows):
+        if not row.strip().startswith('hostname'): continue
+        value = row.split('=', 1)[1].strip()
+        append = value.startswith('%APPEND%')
+        if append: value = value[len('%APPEND%'):].strip()
+        hosts = [h.strip() for h in value.split(',') if h.strip()]
+        hosts = [h for h in hosts if h.startswith('-') or not blocked(h)]
+        rows[i] = 'hostname = '+('%APPEND% ' if append else '')+','.join(dict.fromkeys(hosts+sorted(exclusions)))
+    return replace_section(text, '[MITM]', '\n'.join(rows))
+
 def canonical_rule(line):
     f = [x.strip() for x in line.split(',')]
     if f[0] not in {'DOMAIN', 'DOMAIN-SUFFIX', 'DOMAIN-KEYWORD', 'IP-CIDR', 'IP-CIDR6'}:
@@ -340,6 +365,11 @@ def main():
     parser=argparse.ArgumentParser();parser.add_argument('--offline',action='store_true');parser.add_argument('--bootstrap',action='store_true');args=parser.parse_args()
     profiles = {n:(ROOT/'profiles'/n).read_text() for n in ('full.conf','adblock.sgmodule','enhance.sgmodule')}
     full=profiles['full.conf'];ad=profiles['adblock.sgmodule'];feature=profiles['enhance.sgmodule'];results=[];core=[]
+    bank_hosts = CONF.get('bank_exact_hosts', [])
+    shared_exclusions = financial_exclusions(full) | {'-'+h for h in bank_hosts}
+    for domain in CONF.get('bank_direct_suffixes', []):
+        shared_exclusions.update({'-'+domain, '-*.'+domain})
+    full = apply_financial_exclusions(full, shared_exclusions)
     for source in CONF['core_sources']:
         target=CACHE/'core'/(hashlib.sha256(source['url'].encode()).hexdigest()[:16]+'.list')
         previous=target.read_text() if target.exists() else None
@@ -415,6 +445,16 @@ def main():
             hosts = [h.strip() for h in row.split('=', 1)[1].split(',')]
             mitm[i] = 'hostname = '+','.join(dict.fromkeys(hosts+sorted(exclusions)))
     full = replace_section(full, '[MITM]', '\n'.join(mitm))
+    shared_exclusions |= financial_exclusions(full)
+    full = apply_financial_exclusions(full, shared_exclusions)
+    ad = apply_financial_exclusions(ad, shared_exclusions)
+    feature = apply_financial_exclusions(feature, shared_exclusions)
+    # Known bank app hosts use the current network, before SDK/IP-ASN fallbacks.
+    bank_rows = ['DOMAIN,'+h+',DIRECT' for h in bank_hosts]
+    bank_rows += ['DOMAIN-SUFFIX,'+d+',DIRECT' for d in CONF.get('bank_direct_suffixes', [])]
+    bank_block = '# BEGIN BANK COMPATIBILITY\n'+'\n'.join(bank_rows)+'\n# END BANK COMPATIBILITY'
+    full = re.sub(r'# BEGIN BANK COMPATIBILITY\n.*?# END BANK COMPATIBILITY\n?', '', full, flags=re.S)
+    full = replace_section(full, '[Rule]', bank_block+'\n'+'\n'.join(read_sections(full)['[Rule]']))
     full, _ = deduplicate_url_sections(full)
     ad, _ = deduplicate_url_sections(ad)
     feature, _ = deduplicate_url_sections(feature)

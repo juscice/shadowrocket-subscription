@@ -124,5 +124,18 @@
     "DOMAIN,translate.googleapis.com,📹 YouTube",
     "DOMAIN,translate-pa.googleapis.com,📹 YouTube",
     "AND,((PROTOCOL,TCP),(DST-PORT,5223)),🍎 苹果推送"
+  ],
+  "bank_exact_hosts": [
+    "m.prod.app.hsbcfts.com.cn",
+    "m2.cmbwinglungbank.com",
+    "mbank.grcbank.com",
+    "mres.aibank.com",
+    "direct.z-bank.com",
+    "cdn.jlbank.com.cn",
+    "zjmbank.js96008.com",
+    "cgbank.oss-cn-shenzhen.aliyuncs.com"
+  ],
+  "bank_direct_suffixes": [
+    "pingan.com.cn"
   ]
 }

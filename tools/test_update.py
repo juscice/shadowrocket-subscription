@@ -184,4 +184,26 @@ class DedupRegressionTests(unittest.TestCase):
         self.assertEqual(rows[2],'http-response ^http://api.example/a old new')
         self.assertEqual(count['removed'],0)
 
+class BankCompatibilityTests(unittest.TestCase):
+    def test_financial_exclusion_removes_positive_conflicts(self):
+        text='[MITM]\nhostname = %APPEND% *.bank.example,api.bank.example,ads.other.example\n'
+        out=u.apply_financial_exclusions(text,{'-bank.example','-*.bank.example'})
+        row=u.active(u.read_sections(out)['[MITM]'])[0]
+        self.assertIn('%APPEND%',row)
+        self.assertIn('ads.other.example',row)
+        self.assertNotIn(',api.bank.example',row)
+        self.assertNotIn('%APPEND% *.bank.example',row)
+        self.assertEqual(u.apply_financial_exclusions(out,{'-bank.example','-*.bank.example'}),out)
+    def test_exact_bank_exclusion_keeps_other_hosts(self):
+        text='[MITM]\nenable=false\nhostname = m.prod.app.hsbcfts.com.cn,acs.m.taobao.com,m.ctrip.com\n'
+        out=u.apply_financial_exclusions(text,{'-m.prod.app.hsbcfts.com.cn'})
+        self.assertIn('enable=false',out)
+        self.assertIn('acs.m.taobao.com',out)
+        self.assertIn('m.ctrip.com',out)
+        self.assertEqual(u.financial_exclusions(out),{'-m.prod.app.hsbcfts.com.cn'})
+    def test_bank_host_allowlist_has_no_wildcards_or_duplicates(self):
+        hosts=u.CONF['bank_exact_hosts']
+        self.assertEqual(len(hosts),len(set(hosts)))
+        for host in hosts:self.assertRegex(host,r'^[a-z0-9.-]+$')
+
 if __name__=='__main__':unittest.main()
