@@ -48,14 +48,14 @@
       "removed": 708
     },
     "ai": {
-      "input": 209,
-      "kept": 170,
-      "removed": 39
+      "input": 204,
+      "kept": 166,
+      "removed": 38
     },
     "apple": {
-      "input": 96,
+      "input": 95,
       "kept": 51,
-      "removed": 45
+      "removed": 44
     }
   },
   "references": [
@@ -154,7 +154,7 @@
     {
       "url": "https://raw.githubusercontent.com/LingJingMaster/Shadowrocket-Rules/main/AI.list",
       "status": "ok",
-      "sha256": "437ecda2f8736d829eda5b702b0802c53f71031a911f1332234d42c099ad3728",
+      "sha256": "9c0c203698ffabbc61f1f48ae91120789d4de2b5d711e12a73d63c2ef4ada2e9",
       "path": "upstream/routing/1ac7a77275b6bd261669.list"
     },
     {
@@ -166,7 +166,7 @@
     {
       "url": "https://raw.githubusercontent.com/LingJingMaster/Shadowrocket-Rules/main/Apple.list",
       "status": "ok",
-      "sha256": "1807a7c3357908e0a1c09eb6adc0be6106b59d2e2bc795f600470f6fdc73491a",
+      "sha256": "67c5791523018f216d955ab3453816011c2ff0f0430632033a459b8ef6fccff9",
       "path": "upstream/routing/79ed93fb3287f2eb9aa8.list"
     },
     {
