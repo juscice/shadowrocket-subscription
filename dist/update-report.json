@@ -1012,13 +1012,13 @@
     {
       "url": "https://raw.githubusercontent.com/kokoryh/Sparkle/master/dist/bilibili.protobuf.request.js",
       "status": "ok",
-      "sha256": "d092d4b606fa00d3712b80f589599959d03c6088884955bf4d48e2830bfc573e",
+      "sha256": "213ae859b87198f69f4a890efb592c48f5d988806f298509a75e1e6a8b59341e",
       "path": "upstream/scripts/313f536cb88bf95428f2.js"
     },
     {
       "url": "https://raw.githubusercontent.com/kokoryh/Sparkle/master/dist/bilibili.protobuf.response.js",
       "status": "ok",
-      "sha256": "11cfc005a11141a1d1fe08591b06fe14b470e074e61d4196a1b0fe0286e72eb9",
+      "sha256": "d9a09789a9f2153c27b0a435064dfdcf1723a36f20451a075e37c4f8f21d338f",
       "path": "upstream/scripts/c2465ab207f715a4f7e2.js"
     },
     {
