@@ -1642,7 +1642,7 @@
     {
       "url": "https://yfamilys.com/rule/ASN-CN.list",
       "status": "ok",
-      "sha256": "2933187308231a504a25f34d56ae7c20ea6471686c8b0fc7516dbdee72b53f58",
+      "sha256": "a200ce2bd77d55a974379f440fdd7c3de89e8ac3b92d002587486bffbfe855e0",
       "path": "upstream/rules/95b0870ed5c17814801e.list"
     },
     {
@@ -1660,7 +1660,7 @@
     {
       "url": "https://yfamilys.com/rule/Blizzard.list",
       "status": "ok",
-      "sha256": "698e61ccff63757843f8352a3d1c6a4d5718abd7478de8f4f54bcc7ab0fe091b",
+      "sha256": "dcb89ebae7937e01d41f2c1c2494aaccc2c89d1da675cb53dcae674b0e90bccf",
       "path": "upstream/rules/9f710e264d419fa041ed.list"
     },
     {
