@@ -8,8 +8,8 @@
       "removed": 0
     },
     "lan": {
-      "input": 140,
-      "kept": 140,
+      "input": 142,
+      "kept": 142,
       "removed": 0
     },
     "httpdns": {
@@ -100,7 +100,7 @@
     {
       "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Lan/Lan.list",
       "status": "ok",
-      "sha256": "e524edec216ed7f2fa2f3eb3fe09fe70121acf88408c2394d19b3e2331c54de7",
+      "sha256": "79c3b96f8064bf1b53678fb0dc7d9e92d74c729869fe8dc494afa2e9b12e2856",
       "path": "upstream/routing/e3b69cd215b215607f96.list"
     },
     {
