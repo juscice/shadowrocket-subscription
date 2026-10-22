@@ -48,8 +48,8 @@
       "removed": 708
     },
     "ai": {
-      "input": 204,
-      "kept": 166,
+      "input": 205,
+      "kept": 167,
       "removed": 38
     },
     "apple": {
@@ -160,7 +160,7 @@
     {
       "url": "https://yfamilys.com/rule/ai.list",
       "status": "ok",
-      "sha256": "e3f86cb8e7199754c3b888c3741e08bebfc96c7363ff0b44f641033cc66cae18",
+      "sha256": "101e0da4e98f33e1f406c9b8071bf3ef12cd7f94945f3d3eaf8bc4270a6623d4",
       "path": "upstream/routing/1b59c12c1d96df3ce767.list"
     },
     {
@@ -1660,7 +1660,7 @@
     {
       "url": "https://yfamilys.com/rule/Blizzard.list",
       "status": "ok",
-      "sha256": "dcb89ebae7937e01d41f2c1c2494aaccc2c89d1da675cb53dcae674b0e90bccf",
+      "sha256": "16d943ed7bfef29aea64692c22899a9d5c5038da2bd2260a7f0a0353dedee93d",
       "path": "upstream/rules/9f710e264d419fa041ed.list"
     },
     {
