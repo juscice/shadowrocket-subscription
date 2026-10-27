@@ -172,7 +172,7 @@
     {
       "url": "https://yfamilys.com/rule/Apple.list",
       "status": "ok",
-      "sha256": "a63a4f699cbdac05a3a0ad251a6755fa726e3c3281c67457edfe8af962a0eb19",
+      "sha256": "cf114bc900fb883b25fc7011eb7593f7cdfc2b5160f1ef21d8ef5df5b9cdc132",
       "path": "upstream/routing/ea295cb05cc441dc63ba.list"
     },
     {
@@ -1660,7 +1660,7 @@
     {
       "url": "https://yfamilys.com/rule/Blizzard.list",
       "status": "ok",
-      "sha256": "16d943ed7bfef29aea64692c22899a9d5c5038da2bd2260a7f0a0353dedee93d",
+      "sha256": "1df599899853ccf97f84c7154f345c048f4f926b0af98ec3a7e945f9de8f2a14",
       "path": "upstream/rules/9f710e264d419fa041ed.list"
     },
     {
@@ -1762,7 +1762,7 @@
     {
       "url": "https://yfamilys.com/rule/Steam.list",
       "status": "ok",
-      "sha256": "fc4690f13f3b4f9144702f74a38603ca9c9309b1abf73938cdce73755b28fce6",
+      "sha256": "9ecabe5254f6017b1502ed38bc1db3fce90ad1adc600196959d3c45f2543bfa9",
       "path": "upstream/rules/d5d33702c2c147343681.list"
     },
     {
