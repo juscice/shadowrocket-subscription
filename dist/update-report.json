@@ -43,19 +43,19 @@
       "removed": 22
     },
     "google": {
-      "input": 1419,
-      "kept": 711,
-      "removed": 708
+      "input": 1904,
+      "kept": 718,
+      "removed": 1186
     },
     "ai": {
-      "input": 205,
-      "kept": 167,
-      "removed": 38
+      "input": 458,
+      "kept": 407,
+      "removed": 51
     },
     "apple": {
-      "input": 95,
-      "kept": 51,
-      "removed": 44
+      "input": 2124,
+      "kept": 1597,
+      "removed": 527
     }
   },
   "references": [
@@ -148,7 +148,7 @@
     {
       "url": "https://yfamilys.com/rule/Google.list",
       "status": "ok",
-      "sha256": "2b2f043fcace2302888714936123c3875703801506f9fb1174b19e36ec833ea4",
+      "sha256": "75de5b3494fca8e867fc799941aa5a71c368ef9dbacac4687221e7a45d6e150c",
       "path": "upstream/routing/a15d5e3af5b8341a5f14.list"
     },
     {
@@ -160,7 +160,7 @@
     {
       "url": "https://yfamilys.com/rule/ai.list",
       "status": "ok",
-      "sha256": "101e0da4e98f33e1f406c9b8071bf3ef12cd7f94945f3d3eaf8bc4270a6623d4",
+      "sha256": "8a83061d0d35c835eb0b2ca0f6383d3fa31776c101d88b0623c06488e57d6a64",
       "path": "upstream/routing/1b59c12c1d96df3ce767.list"
     },
     {
@@ -172,13 +172,13 @@
     {
       "url": "https://yfamilys.com/rule/Apple.list",
       "status": "ok",
-      "sha256": "cf114bc900fb883b25fc7011eb7593f7cdfc2b5160f1ef21d8ef5df5b9cdc132",
+      "sha256": "e0239c858da3f9b71afb4f5db00210d04726eb00dc79367de8c837c487d3c067",
       "path": "upstream/routing/ea295cb05cc441dc63ba.list"
     },
     {
       "url": "https://yfamilys.com/rule/AppStore.list",
       "status": "ok",
-      "sha256": "20062ff2d80616e5fbdb360b54c8a9f184e8ec5be47601a4dd79345e8892ec4f",
+      "sha256": "05e8db8ba252a202703ae5e3b4c6187386ce47798f408cd60678c8e82a0238ca",
       "path": "upstream/routing/1741f7c34dacaad4d74b.list"
     },
     {
@@ -1648,85 +1648,85 @@
     {
       "url": "https://yfamilys.com/rule/AppleProxy.list",
       "status": "ok",
-      "sha256": "80b0c2a76f3ff1484ae4e1880a95ff713d537076f35f2385b72ed23dbb96d561",
+      "sha256": "1f96e826b2fc7f4dc7113545900176299815af108324dca1c6eae3ec27d2aba2",
       "path": "upstream/rules/ff75eb0ae0695341b638.list"
     },
     {
       "url": "https://yfamilys.com/rule/BiliBili.list",
       "status": "ok",
-      "sha256": "b0b6ca542b3e023c5db1568285975886f99dd3d2a98efc12e08a392c78d728b7",
+      "sha256": "91fee1d95ac284e7c3b89695699b49f252cac2bfd16edc88e08becdaac10081e",
       "path": "upstream/rules/bf47499b6e0d05cb8bad.list"
     },
     {
       "url": "https://yfamilys.com/rule/Blizzard.list",
       "status": "ok",
-      "sha256": "1df599899853ccf97f84c7154f345c048f4f926b0af98ec3a7e945f9de8f2a14",
+      "sha256": "2c254e19a51b9d06f02a5da7c1576fd2d0ba7f423ad805847048d08f79de07ad",
       "path": "upstream/rules/9f710e264d419fa041ed.list"
     },
     {
       "url": "https://yfamilys.com/rule/ChinaMedia.list",
       "status": "ok",
-      "sha256": "1e03d4cc09c77f14619ee0649f9023f83bf738272239de0c65833a79f4e3e51c",
+      "sha256": "851db6bb627a263ea22061c13b027edf8f73cf1b38d1ba07c05149908d3556b7",
       "path": "upstream/rules/fc4d6e399ef0fd6acd19.list"
     },
     {
       "url": "https://yfamilys.com/rule/Discord.list",
       "status": "ok",
-      "sha256": "706943aeceae3cd4b5054de90f4323014c1fcb85af64308d8e492d764f912893",
+      "sha256": "4af826808950a49d236182ffb0ac37bf4d096d08749820d9a61b31f23c5ac41b",
       "path": "upstream/rules/2ce1a7a4178ea68ed404.list"
     },
     {
       "url": "https://yfamilys.com/rule/Disney.list",
       "status": "ok",
-      "sha256": "851646ffda40afd75f50194bda1eed3e270187a39ed220e333d54aa84f29729e",
+      "sha256": "e3a0ea5b90a8b719f0268630bcf44cbb1f4cb4f3ec4b296b64acb3ed6ad59cb7",
       "path": "upstream/rules/7e7258c4697866d53cc6.list"
     },
     {
       "url": "https://yfamilys.com/rule/Douyu.list",
       "status": "ok",
-      "sha256": "ee436705fe214d17d5f36223962dbdacca33f6cdc0e6e4fc4cbd3f52c4ff3561",
+      "sha256": "2172a2264e43d312dddb9cb56f73a2f9d2975814d405d65e359a9f8ada04cb85",
       "path": "upstream/rules/2427c653cc31d8d0b274.list"
     },
     {
       "url": "https://yfamilys.com/rule/Epic.list",
       "status": "ok",
-      "sha256": "7996135bc776b0d0ba2cdd4a2474bc3604e5a6dc3a95f03a2fe88bfe79b573ea",
+      "sha256": "618486f4306992529cb614d27f0a553ae7c6591dd7a81b59bc3489fe11b79e2f",
       "path": "upstream/rules/bc3c74af0db17c77f067.list"
     },
     {
       "url": "https://yfamilys.com/rule/Facebook.list",
       "status": "ok",
-      "sha256": "02969a9cf7cf0ec10d8266cab49ca31eaad71f852691eaf28a23c76b235d95bc",
+      "sha256": "ad34f56261e3dd5c0760320262d638301b781f2aedb46fbf696234a3c05de93c",
       "path": "upstream/rules/e8b44e4fb7ef4aaeb9e1.list"
     },
     {
       "url": "https://yfamilys.com/rule/Microsoft.list",
       "status": "ok",
-      "sha256": "74c34fd6feaabe9a02bca23d8b26c0be2cf93b5e97352d03b45274a140066309",
+      "sha256": "d379d14af2fd32372ab0fa471bb8d1f7fd9b0b66e270629c93641dea579e9c05",
       "path": "upstream/rules/6d021b3db017dd05e192.list"
     },
     {
       "url": "https://yfamilys.com/rule/Netflix.list",
       "status": "ok",
-      "sha256": "a4362df8fa09bbc47818ec8b90f27c9e989fbafaa836301daf64aa559a1de20b",
+      "sha256": "6a921b167bd9a30e361b427f57bab5677ab1e184aa775c4a1b500ddec2f9f7a3",
       "path": "upstream/rules/2e70b8b34f7fe855eaa1.list"
     },
     {
       "url": "https://yfamilys.com/rule/Nintendo.list",
       "status": "ok",
-      "sha256": "0fd51adddfef840208a7395807ef8a8ee1d31ef36ad90d8e67e2edffb6a64daf",
+      "sha256": "3d6d4eba10152e064222ad179497285636dc47fed046e84b7ef2b888f7dd43e2",
       "path": "upstream/rules/a906c3ab808b7e05ac15.list"
     },
     {
       "url": "https://yfamilys.com/rule/PayPal.list",
       "status": "ok",
-      "sha256": "48d97f446ac03b26e111e5542d0bb31d5a0366f0a479a61bb4da97ae06ade147",
+      "sha256": "b656e9d1afc694cdbfc249883cbbeade4605f8b5e89023c4c62cb7929ebebf98",
       "path": "upstream/rules/57ca0c8e13fbb39329ee.list"
     },
     {
       "url": "https://yfamilys.com/rule/PlayStation.list",
       "status": "ok",
-      "sha256": "7ea8a5184a0c0eb7f2ffbeb6a7e6117f6cb4e34b9f4da03cb7a610ae694a66f6",
+      "sha256": "8b93dfe7094caa86966adcf455ab7e6a22c209f9c076cfa3285545d581f8ec37",
       "path": "upstream/rules/9e5f7853d8b431308467.list"
     },
     {
@@ -1744,73 +1744,73 @@
     {
       "url": "https://yfamilys.com/rule/Reddit.list",
       "status": "ok",
-      "sha256": "b6275951a9cfe706af430cf94c4f4844d0c0696067e1a2314db4e1487264837e",
+      "sha256": "0965b9c1686a53b0d1f32f06a84c2691d7fcab62d40d6523dea38948c2d80b6c",
       "path": "upstream/rules/99972bf40897aab4afd2.list"
     },
     {
       "url": "https://yfamilys.com/rule/Sony.list",
       "status": "ok",
-      "sha256": "6abd81e5be97a6c11005e6a02727904c52a73b6423c80272108ede7fee3066cf",
+      "sha256": "8026cf09000fd2c4cf68e887d9426a99ae141387ee3634e6d5b2c85e689874e7",
       "path": "upstream/rules/e47df6dbcad7bf0aff46.list"
     },
     {
       "url": "https://yfamilys.com/rule/Spotify.list",
       "status": "ok",
-      "sha256": "38ec3e72e9bf0a344c0fcff75abc348fae9cbc22d052913369040630bcc545f6",
+      "sha256": "71746c0f2e5fe2ff30728a73840ce7a94dd9651eb09cc6fb4206961d4eedc5a0",
       "path": "upstream/rules/3a183e542d330478b42b.list"
     },
     {
       "url": "https://yfamilys.com/rule/Steam.list",
       "status": "ok",
-      "sha256": "9ecabe5254f6017b1502ed38bc1db3fce90ad1adc600196959d3c45f2543bfa9",
+      "sha256": "461d56532e532555d0f03e40f1d52f3af704aa25d15cb663fa6a19ba17ee8767",
       "path": "upstream/rules/d5d33702c2c147343681.list"
     },
     {
       "url": "https://yfamilys.com/rule/Telegram.list",
       "status": "ok",
-      "sha256": "a2d776b5b39a7d838c80109ff19a138f6a9d163685ac43c0a4ea380994d8f378",
+      "sha256": "f2eeb1ae6b6804f252e35ed1045309612c02cb94d6d4ec9509c9413a64bb69d9",
       "path": "upstream/rules/0b1ee2dae6e757eedfd6.list"
     },
     {
       "url": "https://yfamilys.com/rule/Twitch.list",
       "status": "ok",
-      "sha256": "38916879eb9a1ca6f9a21415666cf4c3f2831a850a8fef5bca1667636623d983",
+      "sha256": "2bdeaf5b5f73b0a9298e9a0e12631b86695522d157ac2d2a19804ab3bf781769",
       "path": "upstream/rules/d51667936e812612db0b.list"
     },
     {
       "url": "https://yfamilys.com/rule/Twitter.list",
       "status": "ok",
-      "sha256": "371a1ead914bfa4ff5ff4ca338111d6e088517cf4792dd0bd43448b9331d1eb8",
+      "sha256": "873bbe132c6c52d5a1ddcf316ef5f8eabc24ac0587e1e8bd949953241bc18eee",
       "path": "upstream/rules/68a7d71fcac8499c0563.list"
     },
     {
       "url": "https://yfamilys.com/rule/WanMeiShiJie.list",
       "status": "ok",
-      "sha256": "d11c81b0b55531aaa36a7a55d47e1b8ca50930a89f950fe6108014641d1ab438",
+      "sha256": "edfc564d905b091850f6667a62a9c63c45367aef3ab2cc9f1fea6077023a4192",
       "path": "upstream/rules/aca5cff8643e8908e181.list"
     },
     {
       "url": "https://yfamilys.com/rule/WeChat.list",
       "status": "ok",
-      "sha256": "5beb9891d017ceb6ccbd23dddd7d16bb96c64cb84c6af6749aeb4f1dbd53fa3c",
+      "sha256": "981e661a43faee2281bbe5c9e11ee129ffda10e4ea6362a35fe9dcead127853e",
       "path": "upstream/rules/d3bdf89e5b3ec66c96a5.list"
     },
     {
       "url": "https://yfamilys.com/rule/Weibo.list",
       "status": "ok",
-      "sha256": "195eb35b72e9b6ac9ffabe7b9c98105b3dec936b722ec5b478e7401c62ecb0d7",
+      "sha256": "d4250710a93bb98d2eb2fbd89f7426b4878e281411476729897ea1c1ce0d2f75",
       "path": "upstream/rules/379e23ce091c9c9343b4.list"
     },
     {
       "url": "https://yfamilys.com/rule/YouTube.list",
       "status": "ok",
-      "sha256": "dcbac321dcede57ded015cebc8e59044d1551c3ce432da0eb5380a4a91221a68",
+      "sha256": "e56c740340d04459b40ce2be9cb651cb0610d71c2dd31670cd5395691c5071dd",
       "path": "upstream/rules/cf62eda7648814a5a631.list"
     },
     {
       "url": "https://yfamilys.com/rule/YouTubeMusic.list",
       "status": "ok",
-      "sha256": "38ef27370abfb73bcc06356eb4eba3a0779c5b1388b016c6e46f010b2279ed55",
+      "sha256": "0c8d160a557f40603bf4f5bd17fccc0d436275ae0764ad7bbaeacbe9b9de1ff9",
       "path": "upstream/rules/62da7cb2eb86731ec2f5.list"
     }
   ],
