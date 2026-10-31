@@ -48,9 +48,9 @@
       "removed": 1186
     },
     "ai": {
-      "input": 458,
-      "kept": 407,
-      "removed": 51
+      "input": 441,
+      "kept": 395,
+      "removed": 46
     },
     "apple": {
       "input": 2124,
@@ -160,7 +160,7 @@
     {
       "url": "https://yfamilys.com/rule/ai.list",
       "status": "ok",
-      "sha256": "8a83061d0d35c835eb0b2ca0f6383d3fa31776c101d88b0623c06488e57d6a64",
+      "sha256": "6e4d3b6663f1e8aee5cc01c0ffc5571bc51ebe635cfa51e8cbb5bbb4fa116d9a",
       "path": "upstream/routing/1b59c12c1d96df3ce767.list"
     },
     {
