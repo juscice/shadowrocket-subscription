@@ -1642,7 +1642,7 @@
     {
       "url": "https://yfamilys.com/rule/ASN-CN.list",
       "status": "ok",
-      "sha256": "a200ce2bd77d55a974379f440fdd7c3de89e8ac3b92d002587486bffbfe855e0",
+      "sha256": "321fafeadd2ca828ebbe5cca11f5a630d454a299476e6a56ca08ca4c180618f3",
       "path": "upstream/rules/95b0870ed5c17814801e.list"
     },
     {
