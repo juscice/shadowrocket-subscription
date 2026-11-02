@@ -48,9 +48,9 @@
       "removed": 1186
     },
     "ai": {
-      "input": 441,
+      "input": 439,
       "kept": 395,
-      "removed": 46
+      "removed": 44
     },
     "apple": {
       "input": 2124,
@@ -154,7 +154,7 @@
     {
       "url": "https://raw.githubusercontent.com/LingJingMaster/Shadowrocket-Rules/main/AI.list",
       "status": "ok",
-      "sha256": "9c0c203698ffabbc61f1f48ae91120789d4de2b5d711e12a73d63c2ef4ada2e9",
+      "sha256": "85d4359af0fde69386a84866cda7511ac564993c1a8bba1ac304d7eb03b45750",
       "path": "upstream/routing/1ac7a77275b6bd261669.list"
     },
     {
