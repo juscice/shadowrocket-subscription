@@ -53,9 +53,9 @@
       "removed": 44
     },
     "apple": {
-      "input": 2124,
-      "kept": 1597,
-      "removed": 527
+      "input": 2363,
+      "kept": 1835,
+      "removed": 528
     }
   },
   "references": [
@@ -172,7 +172,7 @@
     {
       "url": "https://yfamilys.com/rule/Apple.list",
       "status": "ok",
-      "sha256": "74447a0dca3642487d1ee86f32e140ed719af13137da283b02fda7bb41ab973e",
+      "sha256": "eaad6fab0b4daad0a2ecb32a7b85ff7db8f6f823ae44daf11971a142c919a25a",
       "path": "upstream/routing/ea295cb05cc441dc63ba.list"
     },
     {
@@ -1648,7 +1648,7 @@
     {
       "url": "https://yfamilys.com/rule/AppleProxy.list",
       "status": "ok",
-      "sha256": "63c485e95ad6eaba29f139b8ae06b1db73f45cd84e35ce197822f0adee83a4b3",
+      "sha256": "f63112fa876a43c73cf084811982d02f83324bb6c2ac864487e9990c2c457707",
       "path": "upstream/rules/ff75eb0ae0695341b638.list"
     },
     {
@@ -1702,7 +1702,7 @@
     {
       "url": "https://yfamilys.com/rule/Microsoft.list",
       "status": "ok",
-      "sha256": "1bff370ead8f451d3ccc6b82ecea271746c44893b7340468b60b254086bca3df",
+      "sha256": "fa8d3b78c381c6bfb983149d33d14e457c4842df4b6d8f80467d06386d6924ba",
       "path": "upstream/rules/6d021b3db017dd05e192.list"
     },
     {
@@ -1768,7 +1768,7 @@
     {
       "url": "https://yfamilys.com/rule/Telegram.list",
       "status": "ok",
-      "sha256": "958a03c224943db90e67311501dd95bfcd53e87714f2ee41e6af2329e01f6274",
+      "sha256": "c0b19300ed67628d6228ab0c9f9b9316caad0ef3650b3e0cbd9bcd7e8e31ad2b",
       "path": "upstream/rules/0b1ee2dae6e757eedfd6.list"
     },
     {
