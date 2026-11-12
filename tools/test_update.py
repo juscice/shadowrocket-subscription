@@ -134,7 +134,7 @@ class SplashRegressionTests(unittest.TestCase):
             for url in urls:
                 matches=[r for r in maps if re.search(r.split()[0],url)]
                 self.assertEqual(len(matches),1,(name,url,matches))
-                self.assertIn('data="{}"',matches[0])
+                self.assertTrue('data="{}"' in matches[0] or '"data":{}' in matches[0],(name,url,matches))
                 for row in rewrites:
                     if any(host in row for host in ('goofish','dianping','ctrip','fliggy')):
                         self.assertIsNone(re.search(row.split()[0],url),(name,row,url))

@@ -30,7 +30,7 @@ for row in routing:
 def policy(host):
     for kind,target,value in expanded:
         if (kind=='DOMAIN' and host==target) or (kind=='DOMAIN-SUFFIX' and (host==target or host.endswith('.'+target))) or (kind=='DOMAIN-KEYWORD' and target in host):return value
-expected={'dns.weixin.qq.com':'DIRECT','dns.weixin.qq.com.cn':'DIRECT','api.openai.com':'🤖️ 人工智能','gemini.google.com':'🔍 谷歌服务','imap.gmail.com':'📧 邮件服务','courier.push.apple.com':'🍎 苹果推送','www.hsbc.com.hk':'🏦 汇丰香港','www.bochk.com':'🏦 香港银行','trade.futunn.com':'📈 券商服务','deepseek.com':'DIRECT','translate.googleapis.com':'📹 YouTube','github.com':'🚀 策略选择'}
+expected={'dns.weixin.qq.com':'DIRECT','dns.weixin.qq.com.cn':'DIRECT','c.tieba.baidu.com':'DIRECT','tiebac.baidu.com':'DIRECT','api.openai.com':'🤖️ 人工智能','gemini.google.com':'🤖️ 人工智能','imap.gmail.com':'📧 邮件服务','courier.push.apple.com':'🍎 苹果推送','www.hsbc.com.hk':'🏦 汇丰香港','www.bochk.com':'🏦 香港银行','trade.futunn.com':'📈 券商服务','deepseek.com':'DIRECT','translate.googleapis.com':'🤖️ 人工智能','github.com':'CLAUDE'}
 for host,want in expected.items():
     got=policy(host)
     if got!=want:raise ValueError(f'routing regression {host}: {got} != {want}')

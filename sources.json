@@ -92,14 +92,6 @@
       ]
     },
     {
-      "name": "google",
-      "policy": "🔍 谷歌服务",
-      "urls": [
-        "https://raw.githubusercontent.com/LingJingMaster/Shadowrocket-Rules/main/Google.list",
-        "https://yfamilys.com/rule/Google.list"
-      ]
-    },
-    {
       "name": "ai",
       "policy": "🤖️ 人工智能",
       "urls": [
@@ -108,11 +100,18 @@
       ]
     },
     {
+      "name": "google",
+      "policy": "🔍 谷歌服务",
+      "urls": [
+        "https://raw.githubusercontent.com/LingJingMaster/Shadowrocket-Rules/main/Google.list",
+        "https://yfamilys.com/rule/Google.list"
+      ]
+    },
+    {
       "name": "apple",
       "policy": "🍎 苹果服务",
       "urls": [
         "https://raw.githubusercontent.com/LingJingMaster/Shadowrocket-Rules/main/Apple.list",
-        "https://yfamilys.com/rule/Apple.list",
         "https://yfamilys.com/rule/AppStore.list"
       ]
     }

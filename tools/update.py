@@ -178,6 +178,7 @@ def deduplicate_routing(rows):
 
 def build_routing(offline):
     results, lines, counts, seen = [], list(CONF.get('routing_prefix', [])), {}, set()
+    deferred_ai_asn = []
     for row in lines:
         if row.startswith(('DOMAIN,', 'DOMAIN-SUFFIX,', 'DOMAIN-KEYWORD,', 'IP-CIDR,', 'IP-CIDR6,')):
             seen.add(canonical_routing_rule(row))
@@ -199,7 +200,15 @@ def build_routing(offline):
         lines.append('# '+source['name']+' -> '+source['policy'])
         for row in kept:
             f = row.split(',')
-            lines.append(','.join(f[:2]+[source['policy']]+f[2:]))
+            entry = ','.join(f[:2]+[source['policy']]+f[2:])
+            if source['name'] == 'ai' and f[0] == 'IP-ASN':
+                deferred_ai_asn.append((source['policy'], entry))
+            else:
+                lines.append(entry)
+        if source['name'] == 'google' and deferred_ai_asn:
+            lines.append('# ai (IP-ASN) -> '+deferred_ai_asn[0][0])
+            lines.extend(entry for _, entry in deferred_ai_asn)
+            deferred_ai_asn.clear()
     return '\n'.join(lines), results, counts
 
 
@@ -391,7 +400,9 @@ def main():
     kept=optimize(active(seed.read_text().splitlines())+core,full)
     block='# 自动生成的国内核心广告规则；请编辑profiles，不要修改dist。\n'+'\n'.join(kept)+'\n'
     ad=replace_section(ad,'[Rule]',block)
-    oldset=set(oldad); lines=read_sections(full)['[Rule]'];idx=[i for i,l in enumerate(lines) if l.strip() in oldset]
+    oldset=set(oldad); lines=read_sections(full)['[Rule]']
+    start_idx=next((i for i,l in enumerate(lines) if l.startswith('# 国内核心广告库：')),0)
+    idx=[i for i in range(start_idx,len(lines)) if lines[i].strip() in oldset]
     if not idx: raise ValueError('missing original ad block')
     lo,hi=min(idx),max(idx)
     if any(l.strip() and not l.startswith('#') and l.strip() not in oldset for l in lines[lo:hi+1]):raise ValueError('non-ad routing inside ad block')

@@ -26,10 +26,6 @@ DOMAIN-SUFFIX,adnx.com,REJECT
 DOMAIN-SUFFIX,adrubi.com,REJECT
 DOMAIN-SUFFIX,chagnougoalry.net,REJECT
 DOMAIN-SUFFIX,brilliantchap.com,REJECT
-DOMAIN,api.biliapi.com,REJECT
-DOMAIN,app.biliapi.com,REJECT
-DOMAIN,api.biliapi.net,REJECT
-DOMAIN,app.biliapi.net,REJECT
 AND,((DOMAIN-SUFFIX,chat.bilibili.com), (OR,((DOMAIN-KEYWORD,stun), (DOMAIN-KEYWORD,tracker), (DOMAIN-KEYWORD,p2p)))),REJECT
 AND,((IP-ASN,45090,no-resolve),(DEST-PORT,25641),(PROTOCOL,TCP)),REJECT
 AND,((IP-ASN,63646,no-resolve),(DEST-PORT,25641),(PROTOCOL,TCP)),REJECT
@@ -41,7 +37,6 @@ DOMAIN,adpinpai.video.weibocdn.com,REJECT
 RULE-SET,https://raw.githubusercontent.com/app2smile/rules/master/rule/tieba-ad.list,REJECT
 DOMAIN,free-aos-cdn-image.amap.com,REJECT
 DOMAIN-SUFFIX,v.smtcdns.com,REJECT
-URL-REGEX,^https?:\/\/.+\/amdc\/mobileDispatch,REJECT
 DOMAIN,ad.cyapi.cn,REJECT
 DOMAIN,gather.colorfulclouds.net,REJECT
 DOMAIN,t3.xiaohongshu.com,REJECT
@@ -174,7 +169,7 @@ DOMAIN-SUFFIX,open.ximalaya.com,REJECT
 DOMAIN-SUFFIX,upos-app.ximalaya.com,REJECT
 AND,((URL-REGEX,"^http:\/\/.+\/amdc\/mobileDispatch"),(USER-AGENT,"%E9%97%B2%E9%B1%BC*")),REJECT
 DOMAIN-KEYWORD,iyes.youku.com,REJECT
-DOMAIN-KEYWORD,XiaoQiang,REJECT
+DOMAIN-KEYWORD,xiaoqiang,REJECT
 DOMAIN-SUFFIX,admob.xiaomi.com,REJECT
 DOMAIN-SUFFIX,api.sec.miui.com,REJECT
 DOMAIN-SUFFIX,api.jr.mi.com,REJECT
@@ -245,8 +240,8 @@ URL-REGEX,"^https:\/\/sch\.line\.me\/api\/v\d\/ads$",REJECT
 URL-REGEX,"^https:\/\/uts-front\.line-apps\.com\/event$",REJECT
 URL-REGEX,"^https:\/\/uts-front\.line-apps\.com\/settings$",REJECT
 DOMAIN-SUFFIX,adsyndication.msn.com,REJECT
-DOMAIN,tmead.y.qq.com-NO-DROP,REJECT
-DOMAIN,tmeadbak.y.qq.com-NO-DROP,REJECT
+DOMAIN,tmead.y.qq.com-no-drop,REJECT
+DOMAIN,tmeadbak.y.qq.com-no-drop,REJECT
 DOMAIN-SUFFIX,jampp.com,REJECT
 DOMAIN-SUFFIX,fonts.gstatic.cn,REJECT
 DOMAIN-SUFFIX,pomodoromedia.com,REJECT
@@ -292,7 +287,6 @@ URL-REGEX,^https?:\/\/(www\.zhihu\.com|(103\.41\.167\.(226|234|235|236)))\/api\/
 URL-REGEX,^https?:\/\/(www\.zhihu\.com|(103\.41\.167\.(226|234|235|236)))\/api\/v4\/answers\/\d+\/recommendations,REJECT
 URL-REGEX,^https?:\/\/(www\.zhihu\.com|(103\.41\.167\.(226|234|235|236)))\/commercial_api\/banners_v3\/mobile_banner,REJECT
 URL-REGEX,^https?:\/\/zhuanlan\.zhihu\.com\/api\/articles\/\d+\/recommendation,REJECT
-DOMAIN-KEYWORD,zijieapi,REJECT
 DOMAIN,is.snssdk.com,REJECT
 DOMAIN,*novelapp.ixigua.com,REJECT
 DOMAIN,*default.ixigua.com,REJECT
