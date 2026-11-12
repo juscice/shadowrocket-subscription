@@ -48,14 +48,14 @@
       "removed": 1186
     },
     "ai": {
-      "input": 439,
-      "kept": 395,
+      "input": 441,
+      "kept": 397,
       "removed": 44
     },
     "apple": {
-      "input": 2363,
-      "kept": 1835,
-      "removed": 528
+      "input": 5844,
+      "kept": 5298,
+      "removed": 546
     }
   },
   "references": [
@@ -160,7 +160,7 @@
     {
       "url": "https://yfamilys.com/rule/ai.list",
       "status": "ok",
-      "sha256": "d6187c46e202255312eef2340a131db65b890a9519b62bedbf91dfa6cff29c33",
+      "sha256": "dd84cd570b465542c0597384390136537fbf01a7e439d1bafbcb99bfd60a89bc",
       "path": "upstream/routing/1b59c12c1d96df3ce767.list"
     },
     {
@@ -172,7 +172,7 @@
     {
       "url": "https://yfamilys.com/rule/Apple.list",
       "status": "ok",
-      "sha256": "eaad6fab0b4daad0a2ecb32a7b85ff7db8f6f823ae44daf11971a142c919a25a",
+      "sha256": "879689d35f43ac3c52f356b282bff278c614b72901c25944a996af82a9e2b35e",
       "path": "upstream/routing/ea295cb05cc441dc63ba.list"
     },
     {
@@ -1648,7 +1648,7 @@
     {
       "url": "https://yfamilys.com/rule/AppleProxy.list",
       "status": "ok",
-      "sha256": "f63112fa876a43c73cf084811982d02f83324bb6c2ac864487e9990c2c457707",
+      "sha256": "fa6cb50bf52891579d99284fe2827539d6dc13fc51a8eb9f49809c65f2eff188",
       "path": "upstream/rules/ff75eb0ae0695341b638.list"
     },
     {
@@ -1702,7 +1702,7 @@
     {
       "url": "https://yfamilys.com/rule/Microsoft.list",
       "status": "ok",
-      "sha256": "fa8d3b78c381c6bfb983149d33d14e457c4842df4b6d8f80467d06386d6924ba",
+      "sha256": "02094d800c5b8bb122acd1fdc58dfa4d2c7de03df56c43fb354f558d971b42ed",
       "path": "upstream/rules/6d021b3db017dd05e192.list"
     },
     {
@@ -1768,7 +1768,7 @@
     {
       "url": "https://yfamilys.com/rule/Telegram.list",
       "status": "ok",
-      "sha256": "c0b19300ed67628d6228ab0c9f9b9316caad0ef3650b3e0cbd9bcd7e8e31ad2b",
+      "sha256": "e7b19d067c023201fa27abc5dd55c1820079cb8f98139d1268e70220bd6dea63",
       "path": "upstream/rules/0b1ee2dae6e757eedfd6.list"
     },
     {
