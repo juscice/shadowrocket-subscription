@@ -43,8 +43,8 @@
       "removed": 22
     },
     "ai": {
-      "input": 439,
-      "kept": 397,
+      "input": 440,
+      "kept": 398,
       "removed": 42
     },
     "google": {
@@ -142,7 +142,7 @@
     {
       "url": "https://raw.githubusercontent.com/LingJingMaster/Shadowrocket-Rules/main/AI.list",
       "status": "ok",
-      "sha256": "85d4359af0fde69386a84866cda7511ac564993c1a8bba1ac304d7eb03b45750",
+      "sha256": "04e07578e6f5bcc3f65901aa76e15d9b63d1addae42b0926873d6e1572a2ba39",
       "path": "upstream/routing/1ac7a77275b6bd261669.list"
     },
     {
