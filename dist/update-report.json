@@ -982,25 +982,25 @@
     {
       "url": "https://raw.githubusercontent.com/kokoryh/Sparkle/master/dist/bilibili.json.js",
       "status": "ok",
-      "sha256": "09749a95e96d4b5847d5d6a07476b3ff70b3dc11d8cda2b00e80bd8681594c6e",
+      "sha256": "5b2e1a9c2b203648a75c1e7d1c8b20081005fce6d909fb378ab2c3b5c3b8e4cb",
       "path": "upstream/scripts/9d12fa5caa421a52624d.js"
     },
     {
       "url": "https://raw.githubusercontent.com/kokoryh/Sparkle/master/dist/bilibili.protobuf.request.js",
       "status": "ok",
-      "sha256": "61fc5eaded4cb28d2c21796d3fb92ae8b8c3896346bf16ad3f4f29f6e1db53d2",
+      "sha256": "3d7cf60fb5730ac5ab14ab0aa11826df09f009db724562eb8483d907e4564bf0",
       "path": "upstream/scripts/313f536cb88bf95428f2.js"
     },
     {
       "url": "https://raw.githubusercontent.com/kokoryh/Sparkle/master/dist/bilibili.protobuf.response.js",
       "status": "ok",
-      "sha256": "bfcc0970105056b51a02eb643931c8d4a8d9656f25a5c3f0d6fe9cf6b4d15f8e",
+      "sha256": "4a70452a6f6ca07f9d81069005075dbf2957c349cfe981d26af2d295ebbc016e",
       "path": "upstream/scripts/c2465ab207f715a4f7e2.js"
     },
     {
       "url": "https://raw.githubusercontent.com/kokoryh/Sparkle/master/dist/webpage.bilibili.js",
       "status": "ok",
-      "sha256": "51ac0153239c8ccfbcfa7207cdba4ad6affb6c95e4201f3d54754d17dfeb50c1",
+      "sha256": "567a7d8aa7aafb7256641009222686ec1c2e21a629ac583a0ac677845e0186a0",
       "path": "upstream/scripts/f584131bfb02405f051e.js"
     },
     {
