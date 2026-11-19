@@ -1,4 +1,6 @@
 DOMAIN,az764295.vo.msecnd.net
+DOMAIN,azure.microsoft.com
+DOMAIN,azuremarketplace.microsoft.com
 DOMAIN,azuremigrate.download.prss.microsoft.com
 DOMAIN,azuremigratetest.download.prss.microsoft.com
 DOMAIN,azurestackhub.download.prss.microsoft.com
@@ -6,6 +8,7 @@ DOMAIN,azurestackhubuat.download.prss.microsoft.com
 DOMAIN,b.c2r.ts.cdn.office.net
 DOMAIN,bingsettingssearch.trafficmanager.net
 DOMAIN,bj1.api.bing.com
+DOMAIN,builds.dotnet.microsoft.com
 DOMAIN,cbdstest.download.prss.microsoft.com
 DOMAIN,cn.windowssearch.com
 DOMAIN,collaborate.download.prss.microsoft.com
@@ -20,13 +23,15 @@ DOMAIN,ctldl.windowsupdate.com
 DOMAIN,dc.applicationinsights.azure.com
 DOMAIN,dc.services.visualstudio.com
 DOMAIN,default.exp-tas.com
+DOMAIN,developer.microsoft.com
+DOMAIN,dotnetcli.trafficmanager.net
 DOMAIN,download.microsoft.com
 DOMAIN,download.visualstudio.microsoft.com
 DOMAIN,dreamspark.download.prss.microsoft.com
 DOMAIN,dreamsparkuat.download.prss.microsoft.com
+DOMAIN,dtlgalleryint.cloudapp.net
 DOMAIN,edge.activity.windows.com
 DOMAIN,edge.microsoft.com
-DOMAIN,emoi-cncdn.bing.com
 DOMAIN,f.c2r.ts.cdn.office.net
 DOMAIN,github-api.arkoselabs.com
 DOMAIN,github-cloud.s3.amazonaws.com
@@ -65,7 +70,9 @@ DOMAIN,officemktuat.download.prss.microsoft.com
 DOMAIN,oneocsp.microsoft.com
 DOMAIN,osrelease.download.prss.microsoft.com
 DOMAIN,packages.microsoft.com
+DOMAIN,poshtestgallery.cloudapp.net
 DOMAIN,prodforza.blob.core.windows.net
+DOMAIN,production-copilot-host-westus.webpubsub.azure.com
 DOMAIN,productionresultssa0.blob.core.windows.net
 DOMAIN,productionresultssa1.blob.core.windows.net
 DOMAIN,productionresultssa10.blob.core.windows.net
@@ -86,6 +93,8 @@ DOMAIN,productionresultssa6.blob.core.windows.net
 DOMAIN,productionresultssa7.blob.core.windows.net
 DOMAIN,productionresultssa8.blob.core.windows.net
 DOMAIN,productionresultssa9.blob.core.windows.net
+DOMAIN,psg-int-centralus.cloudapp.net
+DOMAIN,psg-int-eastus.cloudapp.net
 DOMAIN,rink.hockeyapp.net
 DOMAIN,rsm.download.prss.microsoft.com
 DOMAIN,rt.services.visualstudio.com
@@ -99,6 +108,7 @@ DOMAIN,statics.teams.cdn.office.net
 DOMAIN,storecorefulfillment.download.prss.microsoft.com
 DOMAIN,storeedge.microsoft.com
 DOMAIN,storeedgefd.dsx.mp.microsoft.com
+DOMAIN,sundry-star-net-geo.trafficmanager.net
 DOMAIN,surface.download.prss.microsoft.com
 DOMAIN,surface.downloads.prss.microsoft.com
 DOMAIN,vlportal.download.prss.microsoft.com
@@ -167,7 +177,6 @@ DOMAIN-SUFFIX,azcrmc.cn
 DOMAIN-SUFFIX,azk8s.cn
 DOMAIN-SUFFIX,aznbcontent.cn
 DOMAIN-SUFFIX,aztask.cn
-DOMAIN-SUFFIX,azure
 DOMAIN-SUFFIX,azure-api.cn
 DOMAIN-SUFFIX,azure-api.net
 DOMAIN-SUFFIX,azure-apihub.cn
@@ -252,7 +261,6 @@ DOMAIN-SUFFIX,biing.com
 DOMAIN-SUFFIX,binads.com
 DOMAIN-SUFFIX,binb.com
 DOMAIN-SUFFIX,binf.com
-DOMAIN-SUFFIX,bing
 DOMAIN-SUFFIX,bing.com
 DOMAIN-SUFFIX,bing.com.cn
 DOMAIN-SUFFIX,bing.net
@@ -403,7 +411,6 @@ DOMAIN-SUFFIX,here.net
 DOMAIN-SUFFIX,heremaps.cn
 DOMAIN-SUFFIX,hockeyapp.net
 DOMAIN-SUFFIX,hololens.com
-DOMAIN-SUFFIX,hotmail
 DOMAIN-SUFFIX,hotmail.co
 DOMAIN-SUFFIX,hotmail.com
 DOMAIN-SUFFIX,hotmail.eu
@@ -461,7 +468,6 @@ DOMAIN-SUFFIX,mepn.com
 DOMAIN-SUFFIX,mesh.com
 DOMAIN-SUFFIX,mgmt-azure-api.cn
 DOMAIN-SUFFIX,microbit.org
-DOMAIN-SUFFIX,microsoft
 DOMAIN-SUFFIX,microsoft-falcon.io
 DOMAIN-SUFFIX,microsoft-give.com
 DOMAIN-SUFFIX,microsoft-int.com
@@ -691,7 +697,6 @@ DOMAIN-SUFFIX,o365weve.com
 DOMAIN-SUFFIX,oaspapps.com
 DOMAIN-SUFFIX,oaspapps.com.akadns.net
 DOMAIN-SUFFIX,octocaptcha.com
-DOMAIN-SUFFIX,office
 DOMAIN-SUFFIX,office.com
 DOMAIN-SUFFIX,office.net
 DOMAIN-SUFFIX,office365-net.cn
@@ -779,7 +784,6 @@ DOMAIN-SUFFIX,sharepoint.com
 DOMAIN-SUFFIX,sharepointonline.com
 DOMAIN-SUFFIX,signalr.net
 DOMAIN-SUFFIX,skydrive.wns.windows.com
-DOMAIN-SUFFIX,skype
 DOMAIN-SUFFIX,skype-edf.akadns.net
 DOMAIN-SUFFIX,skype.com
 DOMAIN-SUFFIX,skype.net

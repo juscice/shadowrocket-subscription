@@ -43,14 +43,14 @@
       "removed": 22
     },
     "ai": {
-      "input": 440,
-      "kept": 398,
+      "input": 443,
+      "kept": 401,
       "removed": 42
     },
     "google": {
-      "input": 1904,
-      "kept": 716,
-      "removed": 1188
+      "input": 1863,
+      "kept": 737,
+      "removed": 1126
     },
     "apple": {
       "input": 52,
@@ -148,7 +148,7 @@
     {
       "url": "https://yfamilys.com/rule/ai.list",
       "status": "ok",
-      "sha256": "d6187c46e202255312eef2340a131db65b890a9519b62bedbf91dfa6cff29c33",
+      "sha256": "472fd2fd4de36e5aa35b5bc4bc59200682cf6e70f007cf28428c5fdf678b3d86",
       "path": "upstream/routing/1b59c12c1d96df3ce767.list"
     },
     {
@@ -160,7 +160,7 @@
     {
       "url": "https://yfamilys.com/rule/Google.list",
       "status": "ok",
-      "sha256": "46662acd9017e79f59addd5803e4028a13462bc6ec93c057983959f5736d8257",
+      "sha256": "fa71f6b35f28d3acbb2dc8e138dbc6c7740b43446aae369a2361bdcea9c3cdbe",
       "path": "upstream/routing/a15d5e3af5b8341a5f14.list"
     },
     {
@@ -1606,7 +1606,7 @@
     {
       "url": "https://yfamilys.com/rule/AppleProxy.list",
       "status": "ok",
-      "sha256": "63c485e95ad6eaba29f139b8ae06b1db73f45cd84e35ce197822f0adee83a4b3",
+      "sha256": "ab9e856d0b07bd4ddee13486b65f1b7c4595acfe89143e39565461d307db29d8",
       "path": "upstream/rules/ff75eb0ae0695341b638.list"
     },
     {
@@ -1660,7 +1660,7 @@
     {
       "url": "https://yfamilys.com/rule/Microsoft.list",
       "status": "ok",
-      "sha256": "1bff370ead8f451d3ccc6b82ecea271746c44893b7340468b60b254086bca3df",
+      "sha256": "f953b4ea3c63b96ae18f6331470ce9c71eccc2a018d1a5e17f19a41b558731a0",
       "path": "upstream/rules/6d021b3db017dd05e192.list"
     },
     {
@@ -1726,7 +1726,7 @@
     {
       "url": "https://yfamilys.com/rule/Telegram.list",
       "status": "ok",
-      "sha256": "958a03c224943db90e67311501dd95bfcd53e87714f2ee41e6af2329e01f6274",
+      "sha256": "c0b19300ed67628d6228ab0c9f9b9316caad0ef3650b3e0cbd9bcd7e8e31ad2b",
       "path": "upstream/rules/0b1ee2dae6e757eedfd6.list"
     },
     {
@@ -1762,7 +1762,7 @@
     {
       "url": "https://yfamilys.com/rule/YouTube.list",
       "status": "ok",
-      "sha256": "ff6972f4fbc74dcd33748bd31ddf7db70aabe245775cac34d7c418f65663b4f1",
+      "sha256": "0f8eaa53b9f90bdf1616478d789359f38176cd915070f1f05e2affd355c1d1f5",
       "path": "upstream/rules/cf62eda7648814a5a631.list"
     },
     {
