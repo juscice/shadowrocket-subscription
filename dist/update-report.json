@@ -43,8 +43,8 @@
       "removed": 22
     },
     "ai": {
-      "input": 443,
-      "kept": 401,
+      "input": 444,
+      "kept": 402,
       "removed": 42
     },
     "google": {
@@ -148,7 +148,7 @@
     {
       "url": "https://yfamilys.com/rule/ai.list",
       "status": "ok",
-      "sha256": "472fd2fd4de36e5aa35b5bc4bc59200682cf6e70f007cf28428c5fdf678b3d86",
+      "sha256": "47df03fa3a35f88495fb7bfb4e67abc8502459785c38a054ccf4147ae7ad1cf5",
       "path": "upstream/routing/1b59c12c1d96df3ce767.list"
     },
     {
