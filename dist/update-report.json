@@ -1270,7 +1270,7 @@
     {
       "url": "https://raw.githubusercontent.com/zirawell/R-Store/main/Res/Scripts/AntiAd/freshippo.js",
       "status": "ok",
-      "sha256": "b2a3315778443206bab90d40c3cfd7d90c4e726eee64aa65d7df3141865eef3e",
+      "sha256": "ac80d562be6f1892c831824c85eb06f2a44521c8a7e240bdac44ec01e736906c",
       "path": "upstream/scripts/806c7be05c2b8c0a7b0d.js"
     },
     {
@@ -1696,7 +1696,7 @@
     {
       "url": "https://yfamilys.com/rule/ProxyMedia.list",
       "status": "ok",
-      "sha256": "505916b2ccaddc4ca890f3b1e9ffbdd84b4a4a20733d8f74279fd840b432a8b3",
+      "sha256": "dbdbe4c0c0e377ce25bf3850b7641ec4c085d8b2925d0190c146e553fe6bd310",
       "path": "upstream/rules/a9a3bc7fe82e6cc76f28.list"
     },
     {
