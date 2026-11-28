@@ -1,6 +1,6 @@
 {
   "repository": "juscice/shadowrocket-subscription",
-  "ad_rules": 7340,
+  "ad_rules": 7406,
   "routing_merge": {
     "code": {
       "input": 42,
@@ -62,7 +62,7 @@
     {
       "url": "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/BanAD.list",
       "status": "ok",
-      "sha256": "110117815a28fba39adcd32da1c6cf2c8b61b4a8e910ef5afdf965647bdc72a9"
+      "sha256": "8e9ac673d8f8d51a52595127f7c80ef65c288c372b0df363f0b62812990ab979"
     },
     {
       "url": "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/BanProgramAD.list",
@@ -72,7 +72,7 @@
     {
       "url": "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/BanEasyListChina.list",
       "status": "ok",
-      "sha256": "7c9845bdf4f52f86056ae4519505f7c2a5567fea64655ba29db702766f545d18"
+      "sha256": "bbfa49ad67abad9a93d562a5fcf6923529bb6e61b496f803f56e5dbdd1c12534"
     },
     {
       "url": "https://raw.githubusercontent.com/NobyDa/Script/master/Surge/AdRule.list",
